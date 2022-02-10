@@ -33,6 +33,11 @@ int main()
     printf("a = %d\n", a);
     
     AfficherPremierNiveau(TeteListe);
+
+    FILE * f = fopen("fi.txt", "r");
+    RemplirPremierNiveau(TeteListe, f);
+
+    AfficherPremierNiveau(TeteListe);
     
     return 0;
 }
