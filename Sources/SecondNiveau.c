@@ -9,9 +9,7 @@ int AllouerSecondNiveau(SecondNiveau_t ** TeteListe)
     *TeteListe = (SecondNiveau_t *)malloc(sizeof(SecondNiveau_t));
     if (TeteListe == NULL) {
         code = 0;
-    } 
-    else 
-    {
+    } else {
         (*(*TeteListe)).suivant = NULL;
     }
     return code;
