@@ -5,6 +5,7 @@
 
 int main(int argc, char * argv[])
 {
+    /*
     PremierNiveau_t * TeteListe = NULL;
     PremierNiveau_t * Elem1 = NULL;
     PremierNiveau_t * Elem2 = NULL;
@@ -61,15 +62,18 @@ int main(int argc, char * argv[])
 
     //AfficherPremierNiveau(TeteListe);
 
+    
     //FILE * f = fopen("fi.txt", "r");
     //RemplirPremierNiveau(TeteListe, f);
 
     AfficherAgenda(TeteListe);
+    printf("il y a %d arguments\n", argc);*/
 
-    printf("il y a %d arguments\n", argc);
+    premier_niveau_t * TeteListe = NULL;
+    int a;
+    a = remplir_agenda(argv[1], &TeteListe);
+    printf("\na = %d\n", a);
+    afficher_agenda(TeteListe);
 
-    a = RemplirAgenda(argv[1], &TeteListe);
-    printf("a = %d\n", a);
-    
     return 0;
 }

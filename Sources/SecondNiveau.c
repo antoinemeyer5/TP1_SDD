@@ -3,10 +3,10 @@
 #include <stdio.h>
 
 
-int AllouerSecondNiveau(SecondNiveau_t ** TeteListe)
+int allouer_second_niveau(second_niveau_t ** TeteListe)
 {
     int code = 1;
-    *TeteListe = (SecondNiveau_t *)malloc(sizeof(SecondNiveau_t));
+    *TeteListe = (second_niveau_t *)malloc(sizeof(second_niveau_t));
     if (TeteListe == NULL) {
         code = 0;
     } else {
@@ -15,7 +15,7 @@ int AllouerSecondNiveau(SecondNiveau_t ** TeteListe)
     return code;
 }
 
-int AjouterEnTeteSecondNiveau(SecondNiveau_t ** TeteListe, SecondNiveau_t * NouvelElement)
+int ajouter_en_tete_second_niveau(second_niveau_t ** TeteListe, second_niveau_t * NouvelElement)
 {
     int code = 1;
     (*NouvelElement).suivant = *TeteListe;
@@ -23,12 +23,10 @@ int AjouterEnTeteSecondNiveau(SecondNiveau_t ** TeteListe, SecondNiveau_t * Nouv
     return code;
 }
 
-void AfficherSecondNiveau(SecondNiveau_t * TeteListe)
+void afficher_second_niveau(second_niveau_t * TeteListe)
 {
-    if (TeteListe != NULL) 
-    {
-        while ((*TeteListe).suivant != NULL)
-        {
+    if (TeteListe != NULL) {
+        while ((*TeteListe).suivant != NULL) {
             printf("jour : %c - heure : %c%c - action : %s\n ", (*TeteListe).jour[0], (*TeteListe).heure[0], (*TeteListe).heure[1], (*TeteListe).nom);
             TeteListe = (*TeteListe).suivant;
         }

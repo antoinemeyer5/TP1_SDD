@@ -1,13 +1,9 @@
 #include "PremierNiveau.h"
 
-#define TAILLE_ANNEE 4
-#define TAILLE_SEMAINE 2
-#define TAILLE_JOUR 1
-#define TAILLE_HEURE 2
-#define TAILLE_NOM_ACTION 10
+void afficher_chaine(char[], int);
 
-void AfficherChaine(char[], int);
+void afficher_agenda(premier_niveau_t *);
 
-void AfficherAgenda(PremierNiveau_t *);
+int remplir_agenda(char *, premier_niveau_t **);
 
-int RemplirAgenda(char *, PremierNiveau_t **);
+int exister_dans_premier_niveau_agenda(premier_niveau_t *, char *, char *);
