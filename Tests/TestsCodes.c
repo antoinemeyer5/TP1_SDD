@@ -1,14 +1,9 @@
-
-#include "../Sources/SecondNiveau.h"
 #include "../Sources/PremierNiveau.h"
 #include "teZZt.h"
 
 BEGIN_TEST_GROUP(tests_code)
 
-/*
- * 
- * 
- * */
+/*                      */
 TEST(ALLOUER_SECOND_NIVEAU, "wazatest")
 {
     second_niveau_t * sn = NULL;
@@ -17,10 +12,7 @@ TEST(ALLOUER_SECOND_NIVEAU, "wazatest")
     CHECK(1 == code);
 }
 
-/*
- * 
- * 
- * */
+//
 TEST(ALLOUER_Premier_NIVEAU, "wazatest")
 {
     premier_niveau_t * pn = NULL;

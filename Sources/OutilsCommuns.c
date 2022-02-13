@@ -38,20 +38,10 @@ void afficher_agenda(premier_niveau_t * tete_agenda)
             printf("\n");
             // Test de présence d'actions pour une semaine
             if ((*tete_agenda).actions == NULL) {
-                printf("    pas d'actions ...\n");
+                printf("=> ...\n");
             } else {
                 // Parcours de la liste des actions
-                while ((*(*tete_agenda).actions).suivant != NULL) {
-                    printf("    jour : ");
-                    afficher_chaine((*(*tete_agenda).actions).jour, TAILLE_JOUR);
-                    printf(" - heure : ");
-                    afficher_chaine((*(*tete_agenda).actions).heure, TAILLE_HEURE);
-                    printf(" - nom : ");
-                    afficher_chaine((*(*tete_agenda).actions).nom, TAILLE_NOM_ACTION);
-                    printf("\n");
-                    // Passage à l'action suivante dans la liste d'actions
-                    (*tete_agenda).actions = (*(*tete_agenda).actions).suivant;
-                }
+                afficher_second_niveau((*tete_agenda).actions);
             }
             // Passage à la semaine suivante dans la liste de semaines
             tete_agenda = (*tete_agenda).suivant;
@@ -65,12 +55,12 @@ void afficher_agenda(premier_niveau_t * tete_agenda)
 /*                                                          */
 /* En entrée : premier_niveau_t, Pointeur de tête de        */
 /*             l'agenda que l'on étudie                     */
-/*             annee, chaîne représentant l'année           */
-/*             semaine, chaîne représentant la semaine      */
+/*             annee, Chaîne représentant l'année           */
+/*             semaine, Chaîne représentant la semaine      */
 /*                                                          */
 /* En sortie : La valeur entière retournée est 1 si un bloc */
 /*             possède déjà l'année et la semaine passées;  */
-/*             0 sinon.                                     */
+/*             0 sinon                                      */
 /* -------------------------------------------------------- */
 int exister_dans_premier_niveau_agenda(premier_niveau_t * tete_agenda, char * annee, char * semaine)
 {

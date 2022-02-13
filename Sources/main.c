@@ -5,26 +5,26 @@
 
 int main(int argc, char * argv[])
 {
-    /*
-    PremierNiveau_t * TeteListe = NULL;
-    PremierNiveau_t * Elem1 = NULL;
-    PremierNiveau_t * Elem2 = NULL;
-    SecondNiveau_t * ActiTete1 = NULL;
-    SecondNiveau_t * Acti1 = NULL;
-    SecondNiveau_t * Acti2 = NULL;
+    
+    premier_niveau_t * TeteListe = NULL;
+    premier_niveau_t * Elem1 = NULL;
+    premier_niveau_t * Elem2 = NULL;
+    second_niveau_t * ActiTete1 = NULL;
+    second_niveau_t * Acti1 = NULL;
+    second_niveau_t * Acti2 = NULL;
     int a;
 
-    a = AllouerPremierNiveau(&TeteListe);
+    a = allouer_premier_niveau(&TeteListe);
     printf("a = %d\n", a);
-    a = AllouerSecondNiveau(&ActiTete1);
+    a = allouer_second_niveau(&ActiTete1);
     printf("a = %d\n", a);
-    a = AllouerPremierNiveau(&Elem1);
+    a = allouer_premier_niveau(&Elem1);
     printf("a = %d\n", a);
-    a = AllouerPremierNiveau(&Elem2);
+    a = allouer_premier_niveau(&Elem2);
     printf("a = %d\n", a);
-    a = AllouerSecondNiveau(&Acti1);
+    a = allouer_second_niveau(&Acti1);
     printf("a = %d\n", a);
-    a = AllouerSecondNiveau(&Acti2);
+    a = allouer_second_niveau(&Acti2);
     printf("a = %d\n", a);
 
     strcpy((*Elem1).annee, "1999");
@@ -47,14 +47,14 @@ int main(int argc, char * argv[])
     strcpy((*Acti2).nom, "Te st 2azdjaudadzubd");
     (*Acti2).suivant = NULL;
 
-    a = AjouterEnTetePremierNiveau(&TeteListe, Elem1);
+    a = ajouter_en_tete_premier_niveau(&TeteListe, Elem1);
     printf("a = %d\n", a);
-    a = AjouterEnTetePremierNiveau(&TeteListe, Elem2);
+    a = ajouter_en_tete_premier_niveau(&TeteListe, Elem2);
     printf("a = %d\n", a);
 
-    a = AjouterEnTeteSecondNiveau(&ActiTete1, Acti1);
+    a = ajouter_en_tete_second_niveau(&ActiTete1, Acti1);
     printf("a = %d\n", a);
-    a = AjouterEnTeteSecondNiveau(&ActiTete1, Acti2);
+    a = ajouter_en_tete_second_niveau(&ActiTete1, Acti2);
     printf("a = %d\n", a);
     
     (*Elem1).actions = ActiTete1;
@@ -66,14 +66,14 @@ int main(int argc, char * argv[])
     //FILE * f = fopen("fi.txt", "r");
     //RemplirPremierNiveau(TeteListe, f);
 
-    AfficherAgenda(TeteListe);
-    printf("il y a %d arguments\n", argc);*/
+    afficher_agenda(TeteListe);
+    printf("il y a %d arguments\n", argc);
 
-    premier_niveau_t * tete_liste = NULL;
+    /*premier_niveau_t * tete_liste = NULL;
     int a;
     a = remplir_agenda(argv[1], &tete_liste);
     printf("\na = %d\n", a);
-    afficher_agenda(tete_liste);
+    afficher_agenda(tete_liste);*/
 
     return 0;
 }
