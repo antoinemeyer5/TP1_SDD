@@ -3,75 +3,96 @@
 #include <string.h>
 
 /* -------------------------------------------------------- */
-/* AfficherChaine   Affiche une chaîne de caractères        */
+/* afficher_chaine   Affiche une chaîne de caractères       */
 /*                                                          */
-/* En entrée :                                              */
+/* En entrée :  mot, Une chaîne de caractères               */
+/*              taille, Un entier                           */
 /*                                                          */
-/* En sortie :                                              */
-/*                                                          */
+/* En sortie : Rien mais écrit la chaîne dans la sortie     */
+/*             standard                                     */
 /* -------------------------------------------------------- */
 void afficher_chaine(char mot[], int taille)
 {
-    for(int i=0; i<taille; i++){
+    for (int i = 0; i < taille; i++) {
         printf("%c", mot[i]);
     }
 }
 
 /* -------------------------------------------------------- */
-/* AfficherAgenda   Affiche l'agenda au complet             */
+/* afficher_agenda   Affiche l'agenda au complet            */
 /*                                                          */
-/* En entrée :                                              */
+/* En entrée : tete_agenda, Pointeur sur le premier         */
+/*             élement de la liste chaînée                  */
 /*                                                          */
-/* En sortie :                                              */
-/*                                                          */
+/* En sortie : Rien mais écrit dans la sortie standard      */
 /* -------------------------------------------------------- */
-void afficher_agenda(premier_niveau_t * TeteAgenda)
+void afficher_agenda(premier_niveau_t * tete_agenda)
 {
-    if (TeteAgenda != NULL) {
-        while ((*TeteAgenda).suivant != NULL) {
+    if (tete_agenda != NULL) {
+        // Parcours de la liste des semaines
+        while ((*tete_agenda).suivant != NULL) {
             printf("annee : ");
-            afficher_chaine((*TeteAgenda).annee, TAILLE_ANNEE);
+            afficher_chaine((*tete_agenda).annee, TAILLE_ANNEE);
             printf(" - semaine : ");
-            afficher_chaine((*TeteAgenda).semaine, TAILLE_SEMAINE);
+            afficher_chaine((*tete_agenda).semaine, TAILLE_SEMAINE);
             printf("\n");
-
-            //afficher toutes les actions reliées a cette semaine
-            if((*TeteAgenda).actions == NULL){
+            // Test de présence d'actions pour une semaine
+            if ((*tete_agenda).actions == NULL) {
                 printf("    pas d'actions ...\n");
-            }else{
-                while ((*(*TeteAgenda).actions).suivant != NULL) {
+            } else {
+                // Parcours de la liste des actions
+                while ((*(*tete_agenda).actions).suivant != NULL) {
                     printf("    jour : ");
-                    afficher_chaine((*(*TeteAgenda).actions).jour, TAILLE_JOUR);
+                    afficher_chaine((*(*tete_agenda).actions).jour, TAILLE_JOUR);
                     printf(" - heure : ");
-                    afficher_chaine((*(*TeteAgenda).actions).heure, TAILLE_HEURE);
+                    afficher_chaine((*(*tete_agenda).actions).heure, TAILLE_HEURE);
                     printf(" - nom : ");
-                    afficher_chaine((*(*TeteAgenda).actions).nom, TAILLE_NOM_ACTION);
+                    afficher_chaine((*(*tete_agenda).actions).nom, TAILLE_NOM_ACTION);
                     printf("\n");
-
-                    //
-                    (*TeteAgenda).actions = (*(*TeteAgenda).actions).suivant;
+                    // Passage à l'action suivante dans la liste d'actions
+                    (*tete_agenda).actions = (*(*tete_agenda).actions).suivant;
                 }
             }
-            //
-            TeteAgenda = (*TeteAgenda).suivant;
+            // Passage à la semaine suivante dans la liste de semaines
+            tete_agenda = (*tete_agenda).suivant;
         }
     }
 }
 
-int exister_dans_premier_niveau_agenda(premier_niveau_t * TeteAgenda, char * Annee, char * Semaine)
+/* -------------------------------------------------------- */
+/* exister_dans_premier_niveau_agenda   Test si une semaine */
+/*                                      existe déjà ou non  */
+/*                                                          */
+/* En entrée : premier_niveau_t, Pointeur de tête de        */
+/*             l'agenda que l'on étudie                     */
+/*             annee, chaîne représentant l'année           */
+/*             semaine, chaîne représentant la semaine      */
+/*                                                          */
+/* En sortie : La valeur entière retournée est 1 si un bloc */
+/*             possède déjà l'année et la semaine passées;  */
+/*             0 sinon.                                     */
+/* -------------------------------------------------------- */
+int exister_dans_premier_niveau_agenda(premier_niveau_t * tete_agenda, char * annee, char * semaine)
 {
-    int Existe = 0;
-    if (TeteAgenda != NULL) {
-        while ((*TeteAgenda).suivant != NULL && Existe == 0) {
-            if (exister_dans_premier_niveau(TeteAgenda, Annee, Semaine) == 1) {
-                Existe = 1;
+    int existe = 0;
+    if (tete_agenda != NULL) {
+        while ((*tete_agenda).suivant != NULL && existe == 0) {
+            if (exister_dans_premier_niveau(tete_agenda, annee, semaine) == 1) {
+                existe = 1;
             }
-            TeteAgenda = (*TeteAgenda).suivant;
+            tete_agenda = (*tete_agenda).suivant;
         }
     }
-    return Existe;
+    return existe;
 }
 
+/* -------------------------------------------------------- */
+/* remplir_agenda WIP                                       */
+/*                          WORK IN PROGRESS                */
+/*                          WORK IN PROGRESS                */
+/*                          WORK IN PROGRESS                */
+/*                          WORK IN PROGRESS                */
+/* -------------------------------------------------------- */
 int remplir_agenda(char * FichierLisible, premier_niveau_t ** Agenda)
 {
     int code = 1;

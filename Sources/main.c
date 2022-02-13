@@ -69,11 +69,11 @@ int main(int argc, char * argv[])
     AfficherAgenda(TeteListe);
     printf("il y a %d arguments\n", argc);*/
 
-    premier_niveau_t * TeteListe = NULL;
+    premier_niveau_t * tete_liste = NULL;
     int a;
-    a = remplir_agenda(argv[1], &TeteListe);
+    a = remplir_agenda(argv[1], &tete_liste);
     printf("\na = %d\n", a);
-    afficher_agenda(TeteListe);
+    afficher_agenda(tete_liste);
 
     return 0;
 }
