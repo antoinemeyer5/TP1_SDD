@@ -36,8 +36,9 @@ int ajouter_en_tete_second_niveau(second_niveau_t **, second_niveau_t *);
 void afficher_second_niveau(second_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* recherche_motif           Affiche la liste des jours     */
-/*                           avec une action contenant      */
-/*                           un motif donné                 */
+/* rechercher_motif_second_niveau    Affiche la liste       */
+/*                                   des jours avec         */
+/*                                   une action contenant   */
+/*                                   un motif donné         */
 /* -------------------------------------------------------- */
-char * recherche_motif(char [], SecondNiveau_t *);
+char * rechercher_motif_second_niveau(char [], SecondNiveau_t *);
