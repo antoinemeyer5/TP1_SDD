@@ -62,3 +62,6 @@ char * retourner_milieu_chaine(char[], int, int);
 void rechercher_motif_premier_niveau(char[], char[], premier_niveau_t *);
 
 //void afficher_premier_niveau(premier_niveau_t *);
+
+//
+void remplir_informations_premier_niveau(premier_niveau_t *, char *, char *);

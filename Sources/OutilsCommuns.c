@@ -31,10 +31,10 @@ void afficher_agenda(premier_niveau_t * tete_agenda)
     if (tete_agenda != NULL) {
         // Parcours de la liste des semaines
         while ((*tete_agenda).suivant != NULL) {
-            printf("annee : ");
-            afficher_chaine((*tete_agenda).annee, TAILLE_ANNEE);
-            printf(" - semaine : ");
+            printf("Semaine ");
             afficher_chaine((*tete_agenda).semaine, TAILLE_SEMAINE);
+            printf(" de ");
+            afficher_chaine((*tete_agenda).annee, TAILLE_ANNEE);
             printf("\n");
             // Test de présence d'actions pour une semaine
             if ((*tete_agenda).actions == NULL) {
@@ -42,11 +42,11 @@ void afficher_agenda(premier_niveau_t * tete_agenda)
             } else {
                 // Parcours de la liste des actions
                 while ((*(*tete_agenda).actions).suivant != NULL) {
-                    printf("    jour : ");
+                    printf("-> Jour ");
                     afficher_chaine((*(*tete_agenda).actions).jour, TAILLE_JOUR);
-                    printf(" - heure : ");
+                    printf(" à ");
                     afficher_chaine((*(*tete_agenda).actions).heure, TAILLE_HEURE);
-                    printf(" - nom : ");
+                    printf("h faire : ");
                     afficher_chaine((*(*tete_agenda).actions).nom, TAILLE_NOM_ACTION);
                     printf("\n");
                     // Passage à l'action suivante dans la liste d'actions
@@ -124,27 +124,20 @@ int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
             l_jour = retourner_milieu_chaine(ligne_courante, 6, 7);
             l_heure = retourner_milieu_chaine(ligne_courante, 7, 9);
             l_nom_action = retourner_milieu_chaine(ligne_courante, 9, 9+TAILLE_NOM_ACTION+3);
-            
             // Création d'une nouvelle action
             a = allouer_second_niveau(&tete_nouvelle_action);
             a = allouer_second_niveau(&nouvelle_action);
-                // CHECK A SI VAUT 1
-
+            //TESTEZ SI A VAUT 1 !!
             // Remplissage des informations de la nouvelle action
-            strcpy((*nouvelle_action).jour, l_jour);
-            strcpy((*nouvelle_action).heure, l_heure);
-            strcpy((*nouvelle_action).nom, l_nom_action);
-            (*nouvelle_action).suivant = NULL;
-            // Affichage aide au debug
-            //printf("a=%s, s=%s, j=%s, h=%s, nom=%s\n", l_annee, l_semaine, l_jour, l_heure, l_nom_action);
+            remplir_informations_second_niveau(nouvelle_action, l_jour, l_heure, l_nom_action);
             // Test si la potentielle nouvelle action existe déjà dans l'agenda
             if (exister_dans_premier_niveau_agenda(*agenda, l_annee, l_semaine)) {   
                 // Ajoute de la nouvelle action dans une semaine déjà existante
-                //on l'ajoute au bon endroit 
                 semaine_existante = retourner_semaine_existante_dans_agenda(*agenda, l_annee, l_semaine);
                 // Si on a bien trouvé la semaine existante
                 if (semaine_existante != NULL) {
                     // Ajout de la nouvelle action à la liste d'action 
+                    //AJOUTEZ AU BON ENDROIT DANS LA LISTE !!
                     a = ajouter_en_tete_second_niveau(&(*semaine_existante).actions, nouvelle_action);
                 }
             } else {
@@ -153,13 +146,12 @@ int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
                 // Vérification l'allocation de la semaine s'est bien passée
                 if (a == 1) {
                     // Remplissage des informations de la nouvelle semaine
-                    strcpy((*nouvelle_semaine).annee, l_annee);
-                    strcpy((*nouvelle_semaine).semaine, l_semaine);
-                    (*nouvelle_semaine).actions = NULL;
-                    (*nouvelle_semaine).suivant = NULL;
+                    remplir_informations_premier_niveau(nouvelle_semaine, l_annee, l_semaine);
                     // Ajout de la nouvelle semaine à l'agenda
+                    //AJOUTEZ AU BON ENDROIT DANS LA LISTE !!
                     a = ajouter_en_tete_premier_niveau(agenda, nouvelle_semaine);
                     // Ajout de la nouvelle action à la liste d'action 
+                    //AJOUTEZ AU BON ENDROIT DANS LA LISTE !!
                     a = ajouter_en_tete_second_niveau(&tete_nouvelle_action, nouvelle_action);
                     // Branchement entre l'action et la semaine
                     (*nouvelle_semaine).actions = tete_nouvelle_action;

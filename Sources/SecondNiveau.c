@@ -1,6 +1,7 @@
 #include "OutilsCommuns.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 /* -------------------------------------------------------- */
 /* allouer_second_niveau   Alloue l'espace mémoire pour un  */
@@ -116,4 +117,13 @@ void rechercher_motif_second_niveau(char liste_jours[], char motif[], second_niv
     liste_jours[deb] = '\0';
     //printf("%s\n", liste_jours);
     //return liste_jours;
+}
+
+//
+void remplir_informations_second_niveau(second_niveau_t * tete_liste, char * jour, char * heure, char * nom_action)
+{
+    strcpy((*tete_liste).jour, jour);
+    strcpy((*tete_liste).heure, heure);
+    strcpy((*tete_liste).nom, nom_action);
+    (*tete_liste).suivant = NULL;
 }

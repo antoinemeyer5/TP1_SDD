@@ -161,3 +161,12 @@ void rechercher_motif_premier_niveau(char liste_dates[], char motif[], premier_n
     }
     liste_dates[deb] = '\0';
 }
+
+//
+void remplir_informations_premier_niveau(premier_niveau_t * tete_liste, char * annee, char * semaine)
+{
+    strcpy((*tete_liste).annee, annee);
+    strcpy((*tete_liste).semaine, semaine);
+    (*tete_liste).actions = NULL;
+    (*tete_liste).suivant = NULL;
+}
