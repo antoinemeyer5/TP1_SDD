@@ -75,5 +75,8 @@ int main(int argc, char * argv[])
     printf("\na = %d\n", a);
     afficher_agenda(tete_liste);*/
 
+    char * motif = "Te";
+    printf("%s", rechercher_motif_second_niveau(motif, ActiTete1));
+
     return 0;
 }

@@ -68,7 +68,6 @@ void afficher_second_niveau(second_niveau_t * tete_liste)
     }
 }
 
-
 /* -------------------------------------------------------- */
 /* rechercher_motif_second_niveau    Affiche la liste       */
 /*                                   des jours avec         */
@@ -79,7 +78,7 @@ void afficher_second_niveau(second_niveau_t * tete_liste)
 /*                                                          */
 /* En sortie : liste_jours                                  */
 /* -------------------------------------------------------- */
-char * rechercher_motif_second_niveau(char motif[], SecondNiveau_t * liste) {
+char * rechercher_motif_second_niveau(char motif[], second_niveau_t * liste) {
     int         i, j;
     int         deb = 0;
     char        liste_jours[7];
