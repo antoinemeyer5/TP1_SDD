@@ -74,11 +74,14 @@ void afficher_second_niveau(second_niveau_t * tete_liste)
 /*                                   une action contenant   */
 /*                                   un motif donné         */
 /*                                                          */
-/* En entrée : motif, liste                                 */
+/* En entrée : motif, Chaine de caractères à chercher       */
+/*             liste, Pointeur d'une liste d'actions        */
 /*                                                          */
-/* En sortie : liste_jours                                  */
+/* En entrée/sortie : liste_jours, Pointeur d'une liste     */
+/*                    de jours                              */
 /* -------------------------------------------------------- */
-void rechercher_motif_second_niveau(char liste_jours[], char motif[], second_niveau_t * liste) {
+void rechercher_motif_second_niveau(char liste_jours[], char motif[], second_niveau_t * liste) 
+{
     int         i, j;
     int         deb = 0;
     //char        liste_jours[7];
