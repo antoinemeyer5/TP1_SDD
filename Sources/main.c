@@ -5,7 +5,7 @@
 
 int main(int argc, char * argv[])
 {
-    
+    /*
     premier_niveau_t * TeteListe = NULL;
     premier_niveau_t * Elem1 = NULL;
     premier_niveau_t * Elem2 = NULL;
@@ -57,23 +57,15 @@ int main(int argc, char * argv[])
     a = ajouter_en_tete_second_niveau(&ActiTete1, Acti2);
     printf("a = %d\n", a);
     
-    (*Elem1).actions = ActiTete1;
-
-
-    //AfficherPremierNiveau(TeteListe);
+    (*Elem1).actions = ActiTete1;*/
 
     
-    //FILE * f = fopen("fi.txt", "r");
-    //RemplirPremierNiveau(TeteListe, f);
-
-    afficher_agenda(TeteListe);
-    printf("il y a %d arguments\n", argc);
-
-    /*premier_niveau_t * tete_liste = NULL;
+    
+    premier_niveau_t * tete_liste = NULL;
     int a;
     a = remplir_agenda(argv[1], &tete_liste);
     printf("\na = %d\n", a);
-    afficher_agenda(tete_liste);*/
+    afficher_agenda(tete_liste);
 
     return 0;
 }
