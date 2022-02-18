@@ -48,7 +48,6 @@ int ajouter_en_tete_premier_niveau(premier_niveau_t ** tete_liste, premier_nivea
     return code;
 }
 
-
 /* -------------------------------------------------------- */
 /* retourner_debut_chaine    Copie un mot dans une          */
 /*                           nouvelle chaine de             */

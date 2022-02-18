@@ -55,6 +55,7 @@ void afficher_agenda(premier_niveau_t * tete_agenda)
             }
             // Passage à la semaine suivante dans la liste de semaines
             tete_agenda = (*tete_agenda).suivant;
+            printf("\n");
         }
     }
 }
@@ -102,6 +103,7 @@ int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
     char ligne_courante[taille_ligne];
     // Variables spécifiques à la création d'une nouvelle semaine
     premier_niveau_t * nouvelle_semaine = NULL;
+    premier_niveau_t * semaine_existante = NULL;
     char * l_annee;
     char * l_semaine;
     // Variables spécifiques à la création d'une nouvelle action
@@ -138,15 +140,13 @@ int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
             // Test si la potentielle nouvelle action existe déjà dans l'agenda
             if (exister_dans_premier_niveau_agenda(*agenda, l_annee, l_semaine)) {   
                 // Ajoute de la nouvelle action dans une semaine déjà existante
-                printf(" => VRAI\n");
                 //on l'ajoute au bon endroit 
-                
-                //blalblalalal
-                //blalblalalal
-                //blalblalalal
-                //blalblalalal
-                //blalblalalal
-
+                semaine_existante = retourner_semaine_existante_dans_agenda(*agenda, l_annee, l_semaine);
+                // Si on a bien trouvé la semaine existante
+                if (semaine_existante != NULL) {
+                    // Ajout de la nouvelle action à la liste d'action 
+                    a = ajouter_en_tete_second_niveau(&(*semaine_existante).actions, nouvelle_action);
+                }
             } else {
                 // Création d'une nouvelle semaine
                 a = allouer_premier_niveau(&nouvelle_semaine);
@@ -172,4 +172,25 @@ int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
         code = 0;
     }
     return code;
+}
+
+/* -------------------------------------------------------- */
+/* retourner_semaine_existante_dans_agenda  Test si un      */
+/*                                                          */
+/* En entrée :                                              */
+/*                                                          */
+/* En sortie :                                              */
+/* -------------------------------------------------------- */
+premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t * tete_agenda, char * annee, char * semaine)
+{
+    premier_niveau_t * semaine_retour = NULL;
+    if (tete_agenda != NULL) {
+        while ((*tete_agenda).suivant != NULL && semaine_retour == NULL) {
+            if (exister_dans_premier_niveau(tete_agenda, annee, semaine) == 1) {
+                semaine_retour = tete_agenda;
+            }
+            tete_agenda = (*tete_agenda).suivant;
+        }
+    }
+    return semaine_retour;
 }

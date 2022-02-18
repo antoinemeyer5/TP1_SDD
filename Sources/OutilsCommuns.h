@@ -22,3 +22,8 @@ int exister_dans_premier_niveau_agenda(premier_niveau_t *, char *, char *);
 /* -------------------------------------------------------- */
 int remplir_agenda(char *, premier_niveau_t **);
 
+/* -------------------------------------------------------- */
+/* retourner_semaine_existante_dans_agenda                  */
+/*                          WORK IN PROGRESS                */
+/* -------------------------------------------------------- */
+premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t *, char *, char *);
