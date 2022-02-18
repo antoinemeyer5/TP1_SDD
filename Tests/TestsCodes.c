@@ -4,7 +4,7 @@
 BEGIN_TEST_GROUP(tests_code)
 
 /*                      */
-TEST(ALLOUER_SECOND_NIVEAU, "wazatest")
+TEST(ALLOUER_SECOND_NIVEAU, "")
 {
     second_niveau_t * sn = NULL;
     int code;
@@ -12,8 +12,8 @@ TEST(ALLOUER_SECOND_NIVEAU, "wazatest")
     CHECK(1 == code);
 }
 
-//
-TEST(ALLOUER_Premier_NIVEAU, "wazatest")
+/*                      */
+TEST(ALLOUER_Premier_NIVEAU, "")
 {
     premier_niveau_t * pn = NULL;
     int code;
