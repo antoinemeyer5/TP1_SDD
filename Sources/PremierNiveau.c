@@ -50,11 +50,14 @@ int ajouter_en_tete_premier_niveau(premier_niveau_t ** tete_liste, premier_nivea
 
 
 /* -------------------------------------------------------- */
-/* retourner_debut_chaine                                   */
+/* retourner_debut_chaine    Copie un mot dans une          */
+/*                           nouvelle chaine de             */
+/*                           caractères                     */
 /*                                                          */
-/* En entrée : mot, taille_mot                              */
+/* En entrée : mot, Chaine de caractère à copier            */
+/*            taille_mot, Taille de la chaine de caractères */
 /*                                                          */
-/* En sortie : resultat                                     */
+/* En sortie : resultat, Copie du mot                       */
 /* -------------------------------------------------------- */
 char * retourner_debut_chaine(char mot[], int taille_mot)
 {
@@ -68,11 +71,16 @@ char * retourner_debut_chaine(char mot[], int taille_mot)
 //le premier caractere est a la place 0
 
 /* -------------------------------------------------------- */
-/* retourner_milieu_chaine                                  */
+/* retourner_milieu_chaine    Copie les éléments d'une      */
+/*                            chaine de caractères de début */
+/*                            à fin dans une nouvelle       */
+/*                            chaine de caractères          */
 /*                                                          */
-/* En entrée : mot, debut, fin                              */
+/* En entrée : mot, Chaine de caractères à copier           */
+/*             debut, Debut de la chaine à copier           */
+/*             fin, Fin de la chaine à copier               */
 /*                                                          */
-/* En sortie : resultat                                     */
+/* En sortie : resultat, Copie des éléments                 */
 /* -------------------------------------------------------- */
 char * retourner_milieu_chaine(char mot[], int debut, int fin)
 {
