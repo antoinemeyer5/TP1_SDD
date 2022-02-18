@@ -68,7 +68,7 @@ int main(int argc, char * argv[])
     afficher_agenda(tete_liste);*/
 
     char * motif = "Te";
-    char        liste_jours[7];
+    char        liste_jours[8];
     rechercher_motif_second_niveau(liste_jours, motif, ActiTete1);
     printf("%s", liste_jours);
 

@@ -61,3 +61,41 @@ int exister_dans_premier_niveau(premier_niveau_t * Bloc, char * Annee, char * Se
     // retourne 1 si egale
     return Existe;
 }
+
+/* -------------------------------------------------------- */
+/* rechercher_motif_premier_niveau   Affiche la liste       */
+/*                                   des jours avec         */
+/*                                   une action contenant   */
+/*                                   un motif donné         */
+/*                                                          */
+/* En entrée : motif, liste                                 */
+/*                                                          */
+/* En entrée/sortie : liste_jours                           */
+/* -------------------------------------------------------- */
+void rechercher_motif_premier_niveau(char liste_dates[], char motif[], premier_niveau_t * liste) {
+    int         i, j;
+    int         k = 0;
+    int         deb = 0;
+    char        liste_jours[8];
+
+    while (liste != NULL) {
+        rechercher_motif_second_niveau(liste_jours, motif, (*liste).actions);
+        k = 0; 
+        while (liste_jours[0] != '\0') {
+            for (i=0; i<TAILLE_ANNEE; i++) {
+                liste_dates[deb+i] = (*liste).annee[i];
+            }
+            deb += TAILLE_ANNEE;
+            for (j=0; j<TAILLE_SEMAINE; j++) {
+                liste_dates[deb+j] = (*liste).semaine[j];
+            }
+            deb += TAILLE_SEMAINE;
+            liste_dates[deb] = liste_jours[0];
+            liste_jours[0] = liste_jours[k];
+            k++;
+            deb++;
+        }
+        liste = (*liste).suivant;
+    }
+    liste_dates[deb] = '\0';
+}

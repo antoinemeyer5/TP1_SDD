@@ -88,14 +88,14 @@ void rechercher_motif_second_niveau(char liste_jours[], char motif[], second_niv
         j = 0;
         //printf("%c\n", (*liste).jour[0]);
         //printf("%s\n", (*liste).nom);
-        while (j<10 && (*liste).nom[j] != motif[0]) {
+        while (j<TAILLE_NOM_ACTION && (*liste).nom[j] != motif[0]) {
             j++;
             //printf("j : %d\n", j);
         }
 
         if ((*liste).nom[j] == motif[0]) {
             //printf("\nOn y est \n");
-            while (j<10 && motif[i] != '\0' && (*liste).nom[j] == motif[i]) {
+            while (j<TAILLE_NOM_ACTION && motif[i] != '\0' && (*liste).nom[j] == motif[i]) {
                 i++;
                 j++;
                 //printf("(j, i) : (%d %d)\n", j, i);
