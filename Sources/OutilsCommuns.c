@@ -93,67 +93,77 @@ int exister_dans_premier_niveau_agenda(premier_niveau_t * tete_agenda, char * an
 /*                          WORK IN PROGRESS                */
 /*                          WORK IN PROGRESS                */
 /* -------------------------------------------------------- */
-int remplir_agenda(char * FichierLisible, premier_niveau_t ** Agenda)
+int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
 {
     int code = 1;
-    FILE * LeFichier = NULL;
-    int TailleLigne = TAILLE_ANNEE + TAILLE_SEMAINE + TAILLE_JOUR
-        + TAILLE_HEURE + TAILLE_NOM_ACTION + 3;
-    char ligne[TailleLigne];
-    char * LocalAnnee;
-    char * LocalSemaine;
-    char * LocalJour;
-    char * LocalHeure;
-    char * LocalNomAction;
-    //
-    LeFichier = fopen(FichierLisible, "r");
-    if(LeFichier != NULL){
-        while (fgets(ligne, TailleLigne, LeFichier) != NULL) {
-            //printf("%s", ligne);
-            LocalAnnee = retourner_milieu_chaine(ligne, 0, 4);
-            LocalSemaine = retourner_milieu_chaine(ligne, 4, 6);
-            LocalJour = retourner_milieu_chaine(ligne, 6, 7);
-            LocalHeure = retourner_milieu_chaine(ligne, 7, 9);
-            LocalNomAction = retourner_milieu_chaine(ligne, 9, 9+TAILLE_NOM_ACTION+3);
+    FILE * le_fichier = NULL;
+    // Fixation de la taille d'une ligne d'un fichier à lire
+    int taille_ligne = TAILLE_ANNEE + TAILLE_SEMAINE + TAILLE_JOUR + TAILLE_HEURE + TAILLE_NOM_ACTION + 3;
+    char ligne_courante[taille_ligne];
+    // Variables spécifiques à la création d'une nouvelle semaine
+    premier_niveau_t * nouvelle_semaine = NULL;
+    char * l_annee;
+    char * l_semaine;
+    // Variables spécifiques à la création d'une nouvelle action
+    second_niveau_t * tete_nouvelle_action = NULL;
+    second_niveau_t * nouvelle_action = NULL;
+    char * l_jour;
+    char * l_heure;
+    char * l_nom_action;
+    // Variable équivalente à un code de bon fonctionnement ou d'erreur
+    int a;
+    // Ouverture du fichier à lire 
+    le_fichier = fopen(fichier_lisible, "r");
+    if(le_fichier != NULL){
+        while (fgets(ligne_courante, taille_ligne, le_fichier) != NULL) {
+            // Récupération des informations contenues dans une ligne du fichier
+            l_annee = retourner_milieu_chaine(ligne_courante, 0, 4);
+            l_semaine = retourner_milieu_chaine(ligne_courante, 4, 6);
+            l_jour = retourner_milieu_chaine(ligne_courante, 6, 7);
+            l_heure = retourner_milieu_chaine(ligne_courante, 7, 9);
+            l_nom_action = retourner_milieu_chaine(ligne_courante, 9, 9+TAILLE_NOM_ACTION+3);
+            // Création d'une nouvelle action
+            a = allouer_second_niveau(&tete_nouvelle_action);
+            a = allouer_second_niveau(&nouvelle_action);
+                        // CHECK A SI VAUT 1
 
-            printf("a=%s, s=%s, j=%s, h=%s, nom=%s", LocalAnnee, LocalSemaine, LocalJour, LocalHeure, LocalNomAction);
-            //on regarde si newN1 existe deja dans Agenda
-            if (exister_dans_premier_niveau_agenda(*Agenda, LocalAnnee, LocalSemaine)) {   
-                //VRAI on ajoute une action
+            // Remplissage des informations de la nouvelle action
+            strcpy((*nouvelle_action).jour, l_jour);
+            strcpy((*nouvelle_action).heure, l_heure);
+            strcpy((*nouvelle_action).nom, l_nom_action);
+            (*nouvelle_action).suivant = NULL;
+            // Affichage aide au debug
+            //printf("a=%s, s=%s, j=%s, h=%s, nom=%s\n", l_annee, l_semaine, l_jour, l_heure, l_nom_action);
+            // Test si la potentielle nouvelle action existe déjà dans l'agenda
+            if (exister_dans_premier_niveau_agenda(*agenda, l_annee, l_semaine)) {   
+                // Ajoute de la nouvelle action dans une semaine déjà existante
                 printf(" => VRAI\n");
-                //on crée l'action
                 //on l'ajoute au bon endroit 
+                
+                //a = ajouter_en_tete_second_niveau(&tete_nouvelle_action, nouvelle_action);
+
                 //blalblalalal
             } else {
-                //FAUX on le cree
-                printf(" => FAUX\n");
-                premier_niveau_t * TeteNouveauBloc = NULL;
-                second_niveau_t * Action = NULL;
-                int a;
-                a = allouer_second_niveau(&Action);
-                a = allouer_premier_niveau(&TeteNouveauBloc);
-
-                //on crée l'action
-                strcpy((*Action).jour, LocalJour);
-                strcpy((*Action).heure, LocalHeure);
-                strcpy((*Action).nom, LocalNomAction);
-                (*Action).suivant = NULL;
-
-                strcpy((*TeteNouveauBloc).annee, LocalAnnee);
-                strcpy((*TeteNouveauBloc).semaine, LocalSemaine);
-                //on ajoute l'action 1er action
-                (*TeteNouveauBloc).actions = Action;
-                (*TeteNouveauBloc).suivant = NULL;
-
-                //on ajoute le n1 au bon endroit
-                ajouter_en_tete_premier_niveau(Agenda, TeteNouveauBloc);            
+                // Création d'une nouvelle semaine
+                a = allouer_premier_niveau(&nouvelle_semaine);
+                // Vérification l'allocation de la semaine s'est bien passée
+                if (a == 1) {
+                    // Remplissage des informations de la nouvelle semaine
+                    strcpy((*nouvelle_semaine).annee, l_annee);
+                    strcpy((*nouvelle_semaine).semaine, l_semaine);
+                    (*nouvelle_semaine).actions = NULL;
+                    (*nouvelle_semaine).suivant = NULL;
+                    // Ajout de la nouvelle semaine à l'agenda
+                    a = ajouter_en_tete_premier_niveau(agenda, nouvelle_semaine);
+                    // Ajout de la nouvelle action à la liste d'action 
+                    a = ajouter_en_tete_second_niveau(&tete_nouvelle_action, nouvelle_action);
+                    // Branchement entre l'action et la semaine
+                    (*nouvelle_semaine).actions = tete_nouvelle_action;
+                }
             }
-            //on passe à la ligne suivante
-            //lign2 = fgets(ligne, TailleLigne, LeFichier);
-
         }
-        //
-        fclose(LeFichier);
+        // Fermeture du fichier une fois lu entièrement
+        fclose(le_fichier);
     }else{
         code = 0;
     }

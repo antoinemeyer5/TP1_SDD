@@ -1,6 +1,6 @@
 CC=gcc
-main_tests:../Tests/TestsCodes.o PremierNiveau.o SecondNiveau.o ../Tests/teZZt.o
-	$(CC) -o main_tests ../Tests/TestsCodes.o PremierNiveau.o SecondNiveau.o ../Tests/teZZt.o -lm 
+main_tests:../Tests/TestsCodes.o OutilsCommuns.o PremierNiveau.o SecondNiveau.o ../Tests/teZZt.o
+	$(CC) -o main_tests ../Tests/TestsCodes.o OutilsCommuns.o PremierNiveau.o SecondNiveau.o ../Tests/teZZt.o -lm 
 	@echo "Lancer les tests avec  ./main_tests" 
 main:main.o OutilsCommuns.o PremierNiveau.o SecondNiveau.o ../Tests/teZZt.o
 	$(CC) -o main main.o OutilsCommuns.o PremierNiveau.o SecondNiveau.o ../Tests/teZZt.o -lm 

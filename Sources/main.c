@@ -59,16 +59,12 @@ int main(int argc, char * argv[])
     
     (*Elem1).actions = ActiTete1;*/
 
-    
-    
-    premier_niveau_t * tete_liste = NULL;
+    premier_niveau_t * agenda = NULL;
     int a;
-    a = remplir_agenda(argv[1], &tete_liste);
+    a = allouer_premier_niveau(&agenda);
+    a = remplir_agenda(argv[1], &agenda);
     printf("\na = %d\n", a);
-    afficher_agenda(tete_liste);
-
-    char * motif = "Te";
-    printf("%s", rechercher_motif_second_niveau(motif, ActiTete1));
+    afficher_agenda(agenda);
 
     return 0;
 }
