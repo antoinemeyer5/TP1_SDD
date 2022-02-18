@@ -101,7 +101,7 @@ char * retourner_milieu_chaine(char mot[], int debut, int fin)
 /*             semaine, Chaine de caractères recherchée     */                     
 /*                                                          */
 /* En sortie : existe,Entier valant 1 si la semaine existe  */
-/*             déjà; 0 sinon                                */                                      */
+/*             déjà; 0 sinon                                */                                      
 /* -------------------------------------------------------- */
 int exister_dans_premier_niveau(premier_niveau_t * bloc, char * annee, char * semaine)
 {

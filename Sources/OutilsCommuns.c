@@ -122,10 +122,11 @@ int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
             l_jour = retourner_milieu_chaine(ligne_courante, 6, 7);
             l_heure = retourner_milieu_chaine(ligne_courante, 7, 9);
             l_nom_action = retourner_milieu_chaine(ligne_courante, 9, 9+TAILLE_NOM_ACTION+3);
+            
             // Création d'une nouvelle action
             a = allouer_second_niveau(&tete_nouvelle_action);
             a = allouer_second_niveau(&nouvelle_action);
-                        // CHECK A SI VAUT 1
+                // CHECK A SI VAUT 1
 
             // Remplissage des informations de la nouvelle action
             strcpy((*nouvelle_action).jour, l_jour);
@@ -140,9 +141,12 @@ int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
                 printf(" => VRAI\n");
                 //on l'ajoute au bon endroit 
                 
-                //a = ajouter_en_tete_second_niveau(&tete_nouvelle_action, nouvelle_action);
-
                 //blalblalalal
+                //blalblalalal
+                //blalblalalal
+                //blalblalalal
+                //blalblalalal
+
             } else {
                 // Création d'une nouvelle semaine
                 a = allouer_premier_niveau(&nouvelle_semaine);
