@@ -74,43 +74,46 @@ void afficher_second_niveau(second_niveau_t * tete_liste)
 /*                                   une action contenant   */
 /*                                   un motif donné         */
 /*                                                          */
-/* En entrée : motif, liste                                 */
+/* En entrée : motif, Chaine de caractères à chercher       */
+/*             liste, Pointeur d'une liste d'actions        */
 /*                                                          */
-/* En sortie : liste_jours                                  */
+/* En entrée/sortie : liste_jours, Pointeur d'une liste     */
+/*                    de jours                              */
 /* -------------------------------------------------------- */
-char * rechercher_motif_second_niveau(char motif[], second_niveau_t * liste) {
+void rechercher_motif_second_niveau(char liste_jours[], char motif[], second_niveau_t * liste) 
+{
     int         i, j;
     int         deb = 0;
-    char        liste_jours[7];
+    //char        liste_jours[7];
 
     while (liste != NULL) {
         i = 0;
         j = 0;
-        printf("%c\n", (*liste).jour[0]);
-        printf("%s\n", (*liste).nom);
-        while (j<10 && (*liste).nom[j] != motif[0]) {
+        //printf("%c\n", (*liste).jour[0]);
+        //printf("%s\n", (*liste).nom);
+        while (j<TAILLE_NOM_ACTION && (*liste).nom[j] != motif[0]) {
             j++;
-            printf("j : %d\n", j);
+            //printf("j : %d\n", j);
         }
 
         if ((*liste).nom[j] == motif[0]) {
-            printf("\nOn y est \n");
-            while (j<10 && motif[i] != '\0' && (*liste).nom[j] == motif[i]) {
+            //printf("\nOn y est \n");
+            while (j<TAILLE_NOM_ACTION && motif[i] != '\0' && (*liste).nom[j] == motif[i]) {
                 i++;
                 j++;
-                printf("(j, i) : (%d %d)\n", j, i);
-                printf("%c =? %c\n", (*liste).nom[j], motif[i]);
+                //printf("(j, i) : (%d %d)\n", j, i);
+                //printf("%c =? %c\n", (*liste).nom[j], motif[i]);
             }
 
             if (motif[i] == '\0') {
                 liste_jours[deb] = (*liste).jour[0];
                 deb++;
-                printf("On a : %s", liste_jours);
+                //printf("On a : %s", liste_jours);
             }
         }
         liste = (*liste).suivant;
     }
     liste_jours[deb] = '\0';
-    printf("%s\n", liste_jours);
-    return liste_jours;
+    //printf("%s\n", liste_jours);
+    //return liste_jours;
 }

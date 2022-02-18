@@ -5,7 +5,7 @@
 
 int main(int argc, char * argv[])
 {
-    /*
+    
     premier_niveau_t * TeteListe = NULL;
     premier_niveau_t * Elem1 = NULL;
     premier_niveau_t * Elem2 = NULL;
@@ -44,7 +44,7 @@ int main(int argc, char * argv[])
 
     strcpy((*Acti2).jour, "4");
     strcpy((*Acti2).heure, "23");
-    strcpy((*Acti2).nom, "Te st 2azdjaudadzubd");
+    strcpy((*Acti2).nom, "Te st 2azd");
     (*Acti2).suivant = NULL;
 
     a = ajouter_en_tete_premier_niveau(&TeteListe, Elem1);
@@ -57,14 +57,16 @@ int main(int argc, char * argv[])
     a = ajouter_en_tete_second_niveau(&ActiTete1, Acti2);
     printf("a = %d\n", a);
     
-    (*Elem1).actions = ActiTete1;*/
+    (*Elem1).actions = ActiTete1;
 
-    premier_niveau_t * agenda = NULL;
+     premier_niveau_t * agenda = NULL;
     int a;
     a = allouer_premier_niveau(&agenda);
     a = remplir_agenda(argv[1], &agenda);
     printf("\na = %d\n", a);
     afficher_agenda(agenda);
+
+    return 0;
 
     return 0;
 }

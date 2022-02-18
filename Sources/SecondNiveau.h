@@ -41,4 +41,4 @@ void afficher_second_niveau(second_niveau_t *);
 /*                                   une action contenant   */
 /*                                   un motif donné         */
 /* -------------------------------------------------------- */
-char * rechercher_motif_second_niveau(char [], second_niveau_t *);
+void rechercher_motif_second_niveau(char [], char [], second_niveau_t *);
