@@ -102,16 +102,11 @@ int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
     int taille_ligne = TAILLE_ANNEE + TAILLE_SEMAINE + TAILLE_JOUR + TAILLE_HEURE + TAILLE_NOM_ACTION + 3;
     char ligne_courante[taille_ligne];
     // Variables spécifiques à la création d'une nouvelle semaine
-    premier_niveau_t * nouvelle_semaine = NULL;
-    premier_niveau_t * semaine_existante = NULL;
-    char * l_annee;
-    char * l_semaine;
+    premier_niveau_t * nouvelle_semaine = NULL, * semaine_existante = NULL;
+    char * l_annee, * l_semaine;
     // Variables spécifiques à la création d'une nouvelle action
-    second_niveau_t * tete_nouvelle_action = NULL;
-    second_niveau_t * nouvelle_action = NULL;
-    char * l_jour;
-    char * l_heure;
-    char * l_nom_action;
+    second_niveau_t * tete_nouvelle_action = NULL, * nouvelle_action = NULL;
+    char * l_jour, * l_heure, * l_nom_action;
     // Variable équivalente à un code de bon fonctionnement ou d'erreur
     int a;
     // Ouverture du fichier à lire 
