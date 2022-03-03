@@ -5,18 +5,18 @@
 /* Constantes pour la taille des différents éléments de la  */
 /* structure                                                */
 /* -------------------------------------------------------- */
-#define TAILLE_ANNEE 4
-#define TAILLE_SEMAINE 2
+#define TAILLE_ANNEE    4
+#define TAILLE_SEMAINE  2
 
 /* -------------------------------------------------------- */
 /* second_niveau_t  Structure représentant une semaine      */
 /* -------------------------------------------------------- */
 typedef struct premier_niveau premier_niveau_t;
-struct premier_niveau{
+struct premier_niveau {
     char                annee[TAILLE_ANNEE];
     char                semaine[TAILLE_SEMAINE];
-    second_niveau_t    * actions;
-    premier_niveau_t   * suivant;
+    second_niveau_t   * actions;
+    premier_niveau_t  * suivant;
 };
 
 /* -------------------------------------------------------- */
@@ -61,6 +61,10 @@ char * retourner_milieu_chaine(char[], int, int);
 /* -------------------------------------------------------- */
 void rechercher_motif_premier_niveau(char[], char[], premier_niveau_t *);
 
+/* -------------------------------------------------------- */
+/* afficher_premier_niveau  Affiche les informations de     */
+/*                          la semaine                      */
+/* -------------------------------------------------------- */
 //void afficher_premier_niveau(premier_niveau_t *);
 
 //

@@ -2,19 +2,19 @@
 /* Constantes pour la taille des différents éléments de la  */
 /* structure                                                */
 /* -------------------------------------------------------- */
-#define TAILLE_JOUR 1
-#define TAILLE_HEURE 2
-#define TAILLE_NOM_ACTION 10
+#define TAILLE_JOUR         1
+#define TAILLE_HEURE        2
+#define TAILLE_NOM_ACTION   10
 
 /* -------------------------------------------------------- */
 /* second_niveau_t  Structure représentant une action       */
 /* -------------------------------------------------------- */
 typedef struct second_niveau second_niveau_t;
-struct second_niveau{
+struct second_niveau {
     char               jour[TAILLE_JOUR];
     char               heure[TAILLE_HEURE];
     char               nom[TAILLE_NOM_ACTION];
-    second_niveau_t   * suivant;
+    second_niveau_t  * suivant;
 };
 
 /* -------------------------------------------------------- */

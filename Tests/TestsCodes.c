@@ -13,7 +13,7 @@ TEST(ALLOUER_SECOND_NIVEAU, "")
 }
 
 /*                      */
-TEST(ALLOUER_Premier_NIVEAU, "")
+TEST(ALLOUER_PREMIER_NIVEAU, "")
 {
     premier_niveau_t * pn = NULL;
     int code;

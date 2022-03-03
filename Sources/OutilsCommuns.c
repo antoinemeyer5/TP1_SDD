@@ -181,3 +181,76 @@ premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t * te
     }
     return semaine_retour;
 }
+
+
+
+/* -------------------------------------------------------- */
+/* ajouter_tri_croissant_premier_niveau Ajoute dans la liste*/
+/*                                      au bon endroit en   */
+/*                                      gardant le tri      */
+/*                                      croissant           */
+/*                                                          */
+/* En entrée : nouveau_bloc, Pointeur à ajouter à la liste  */
+/*                                                          */
+/* En entrée/sortie : tete_liste, Pointeur de la liste à    */
+/*                    laquelle on veut ajouter un bloc      */
+/*                                                          */
+/* En sortie : code, Entier valant 1 si l'ajout s'est bien  */
+/*             passée; 0 sinon                              */                                                       
+/* -------------------------------------------------------- */
+int ajouter_tri_croissant(premier_niveau_t ** tete_liste, premier_niveau_t * nouvel_element, second_niveau_t ** tete_nouvelle_action, second_niveau_t * nouvelle_action)  
+{
+    int code = 1;
+    int elem_entrez = 0;
+    premier_niveau_t * cour;
+    int resultat_comparaison_annee;
+    cour = *tete_liste;
+
+    // si on n'a pas de suivant c'est qu'on a pas de liste encore donc on ajoute le premier en tete
+    if ((*cour).suivant == NULL) {
+        printf("ajout en tete\n");
+        // Ajout de la nouvelle semaine à l'agenda
+        code = ajouter_en_tete_premier_niveau(tete_liste, nouvel_element);
+        // Ajout de la nouvelle action à la liste d'action 
+        code = ajouter_en_tete_second_niveau(tete_nouvelle_action, nouvelle_action);
+        elem_entrez = 1;
+    }
+    // Tant qu'on peut parcourir la liste deja existante et qu'on a pas entre le nouveau alors on cherche une place
+    while (elem_entrez == 0 && (*cour).suivant != NULL) {
+        //
+        resultat_comparaison_annee = strcmp(retourner_milieu_chaine((*nouvel_element).annee, 0, 4), retourner_milieu_chaine((*(*tete_liste)).annee, 0, 4));
+        printf("resultat comparaison annee : %d \n", resultat_comparaison_annee);
+        //on regarde si le nouvel element est plus petit que le courant alors il sera inserer avant
+        if (resultat_comparaison_annee == -1) {
+            printf("nouveau plus petit que le courant\n");
+            //ajoute avant le courant
+            elem_entrez = 1;
+        }
+        //sinon si le nouvel element est égal au courant alors il est inserer avant ou apres BLC
+        if (resultat_comparaison_annee == 0) {
+            printf("nouveau égale au courant\n");
+            //on compare les numéros des semaines
+            //.........
+            elem_entrez = 1;
+        }
+        //sinon si le nouvel element est plus grand que le courant alors on avance le courant. ATTENTION si on arrive a un courant nul alors le nouvel est le nouveau plus grand donc on l'insere en dernire position quoi
+        cour = (*cour).suivant;
+    }
+    //si on est ici et que elem_entrez == 0 alors on a trouve le nouveau plus grand donc on ajoute en queue ici
+    if (elem_entrez == 0) {
+        printf("ajoute en queue\n");
+        //ajoute en queue
+        remplir_informations_premier_niveau(cour, nouvel_element->annee, nouvel_element->semaine);
+
+
+        //code = ajouter_en_tete_second_niveau(tete_nouvelle_action, nouvelle_action);
+
+        (*cour).suivant = nouvel_element;
+        (*nouvel_element).suivant = NULL;
+        elem_entrez = 1;
+    }
+
+    printf("element entrez ? : %d\n", elem_entrez);
+
+    return code;
+}
