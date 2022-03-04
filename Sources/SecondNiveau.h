@@ -45,3 +45,8 @@ void rechercher_motif_second_niveau(char [], char [], second_niveau_t *);
 
 //
 void remplir_informations_second_niveau(second_niveau_t *, char *, char *, char *);
+
+//
+int ajouter_DN_bon_endroit(second_niveau_t **, second_niveau_t *);
+
+int comparer_heures_et_jours(second_niveau_t *, second_niveau_t *);

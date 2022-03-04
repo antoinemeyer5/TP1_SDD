@@ -69,3 +69,10 @@ void rechercher_motif_premier_niveau(char[], char[], premier_niveau_t *);
 
 //
 void remplir_informations_premier_niveau(premier_niveau_t *, char *, char *);
+
+/* -------------------------------------------------------- */
+/* ajouter_tri_croissant    Ajoute dans la liste au bon     */
+/*                          endroit en gardant le tri       */
+/*                          croissant                       */
+/* -------------------------------------------------------- */
+int ajouter_PN_bon_endroit(premier_niveau_t **, premier_niveau_t *);
