@@ -58,17 +58,17 @@ int ajouter_en_tete_second_niveau(second_niveau_t ** tete_liste, second_niveau_t
 /* -------------------------------------------------------- */
 void afficher_second_niveau(second_niveau_t * tete_liste)
 {
-    while ((*tete_liste).suivant != NULL) {
+    second_niveau_t * courant = tete_liste;
+    while (courant != NULL) {
         // Affichage des informations d'une action
-        printf("=> jour : ");
-        afficher_chaine((*tete_liste).jour, TAILLE_JOUR);
-        printf(" - heure : ");
-        afficher_chaine((*tete_liste).heure, TAILLE_HEURE);
-        printf(" - nom : ");
-        afficher_chaine((*tete_liste).nom, TAILLE_NOM_ACTION);
-        printf("\n");
+        printf("-> Jour ");
+        afficher_chaine((*courant).jour, TAILLE_JOUR);
+        printf(" à ");
+        afficher_chaine((*courant).heure, TAILLE_HEURE);
+        printf("h faire : ");
+        afficher_chaine((*courant).nom, TAILLE_NOM_ACTION);
         // Passage à l'action suivante dans la liste des actions
-        tete_liste = (*tete_liste).suivant;
+        courant = (*courant).suivant;
     }
 }
 
@@ -122,7 +122,7 @@ void rechercher_motif_second_niveau(char liste_jours[], char motif[], second_niv
     //return liste_jours;
 }
 
-//
+/* -------------------------------------------------------- */
 void remplir_informations_second_niveau(second_niveau_t * tete_liste, char * jour, char * heure, char * nom_action)
 {
     strncpy((*tete_liste).jour, jour, TAILLE_JOUR);
@@ -132,17 +132,15 @@ void remplir_informations_second_niveau(second_niveau_t * tete_liste, char * jou
 }
 
 /* -------------------------------------------------------- */
-/* */
-/* -------------------------------------------------------- */
 int ajouter_DN_bon_endroit(second_niveau_t ** tete_liste, second_niveau_t * nouveau_bloc)
 {
     int code = 1;
     int trouve = 0;
     second_niveau_t ** precedent = tete_liste;
+    int resu_coma;
     while (*precedent != NULL && trouve == 0) {
         //comparaison
-        int resu_coma = comparer_heures_et_jours(*precedent, nouveau_bloc);
-        printf("result:%d", resu_coma);
+        resu_coma = comparer_heures_et_jours(*precedent, nouveau_bloc);
         if (resu_coma == 3 || resu_coma == 1) {
             trouve = 1;
         }
@@ -150,13 +148,9 @@ int ajouter_DN_bon_endroit(second_niveau_t ** tete_liste, second_niveau_t * nouv
         if (trouve != 1) {
             precedent = &((*(*precedent)).suivant);
         }
-        // soit j'ajoute avant le precedent = 1 ou 2
-        //nouveau_bloc->suivant = *precedent; 
-        //*precedent = nouveau_bloc;
     }
     nouveau_bloc->suivant = *precedent; 
     *precedent = nouveau_bloc;
-    printf("oui\n");
     return code;
 }
 
@@ -167,11 +161,9 @@ int comparer_heures_et_jours(second_niveau_t * courant, second_niveau_t * nouvea
     char * courant_heure = retourner_debut_chaine((*courant).heure, TAILLE_HEURE);
     char * nouveau_jour = retourner_debut_chaine((*nouveau_bloc).jour, TAILLE_JOUR);
     char * nouveau_heure = retourner_debut_chaine((*nouveau_bloc).heure, TAILLE_HEURE);
-    printf("\n%s, %s, %s, %s\n", courant_jour, courant_heure, nouveau_jour, nouveau_heure);
     int comparaison_jours = strncmp(nouveau_jour, courant_jour, TAILLE_JOUR);
     int comparaison_heures = strncmp(nouveau_heure, courant_heure, TAILLE_HEURE);
     int resultat = 0;
-    printf("compa heure :%d, compa jour :%d\n", comparaison_heures, comparaison_jours);
     //si même jours
     if (comparaison_jours == 0) {
         //si même heure

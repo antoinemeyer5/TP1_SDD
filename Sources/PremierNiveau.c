@@ -23,6 +23,7 @@ int allouer_premier_niveau(premier_niveau_t ** tete_liste)
     if (tete_liste == NULL) {
         code = 0;
     } else {
+        strcpy((*(*tete_liste)).annee, "vide");
         (*(*tete_liste)).suivant = NULL;
     }
     return code;
@@ -171,8 +172,6 @@ void remplir_informations_premier_niveau(premier_niveau_t * tete_liste, char * a
     (*tete_liste).suivant = NULL;
 }
 
-
-
 /* -------------------------------------------------------- */
 /* ajouter_tri_croissant_premier_niveau Ajoute dans la liste*/
 /*                                      au bon endroit en   */
@@ -189,71 +188,59 @@ void remplir_informations_premier_niveau(premier_niveau_t * tete_liste, char * a
 /* -------------------------------------------------------- */
 int ajouter_PN_bon_endroit(premier_niveau_t ** tete_liste, premier_niveau_t * nouvel_element)  
 {
-    /*int code = 1;
-    int elem_entrez = 0;
-    premier_niveau_t * cour;
-    int resultat_comparaison_annee;
-    cour = *tete_liste;
-
-    // si on n'a pas de suivant c'est qu'on a pas de liste encore donc on ajoute le premier en tete
-    if ((*cour).suivant == NULL) {
-        printf("ajout en tete\n");
-        // Ajout de la nouvelle semaine à l'agenda
-        code = ajouter_en_tete_premier_niveau(tete_liste, nouvel_element);
-        // Ajout de la nouvelle action à la liste d'action 
-        code = ajouter_en_tete_second_niveau(tete_nouvelle_action, nouvelle_action);
-        elem_entrez = 1;
-    }
-    // Tant qu'on peut parcourir la liste deja existante et qu'on a pas entre le nouveau alors on cherche une place
-    while (elem_entrez == 0 && (*cour).suivant != NULL) {
-        //
-        resultat_comparaison_annee = strcmp(retourner_milieu_chaine((*nouvel_element).annee, 0, 4), retourner_milieu_chaine((*(*tete_liste)).annee, 0, 4));
-        printf("resultat comparaison annee : %d \n", resultat_comparaison_annee);
-        //on regarde si le nouvel element est plus petit que le courant alors il sera inserer avant
-        if (resultat_comparaison_annee == -1) {
-            printf("nouveau plus petit que le courant\n");
-            //ajoute avant le courant
-            elem_entrez = 1;
-        }
-        //sinon si le nouvel element est égal au courant alors il est inserer avant ou apres BLC
-        if (resultat_comparaison_annee == 0) {
-            printf("nouveau égale au courant\n");
-            //on compare les numéros des semaines
-            //.........
-            elem_entrez = 1;
-        }
-        //sinon si le nouvel element est plus grand que le courant alors on avance le courant. ATTENTION si on arrive a un courant nul alors le nouvel est le nouveau plus grand donc on l'insere en dernire position quoi
-        cour = (*cour).suivant;
-    }
-    //si on est ici et que elem_entrez == 0 alors on a trouve le nouveau plus grand donc on ajoute en queue ici
-    if (elem_entrez == 0) {
-        printf("ajoute en queue\n");
-        //ajoute en queue
-        remplir_informations_premier_niveau(cour, nouvel_element->annee, nouvel_element->semaine);
-
-
-        //code = ajouter_en_tete_second_niveau(tete_nouvelle_action, nouvelle_action);
-
-        (*cour).suivant = nouvel_element;
-        (*nouvel_element).suivant = NULL;
-        elem_entrez = 1;
-    }
-
-    printf("element entrez ? : %d\n", elem_entrez);
-
-    return code;*/
-
     int code = 1;
-    int range = 0;
-
-
-
-
-    printf("PN range:%d\n", range);
-    (*nouvel_element).suivant = *tete_liste;
-    *tete_liste = nouvel_element;
-    
+    int trouve = 0;
+    premier_niveau_t ** precedent = tete_liste;
+    int resu_coma;
+    while (*precedent != NULL && trouve == 0) {
+        resu_coma = comparer_semaines_et_annees(*precedent, nouvel_element);
+        if (resu_coma == 3 || resu_coma == 1) {
+            trouve = 1;
+        }
+        //cas ajout en tete
+        if (trouve != 1) {
+            precedent = &((*(*precedent)).suivant);
+        }
+    }
+    nouvel_element->suivant = *precedent;
+    *precedent = nouvel_element;
     return code;
+}
 
 
+//void afficher_premier_niveau(premier_niveau_t * tete_liste){}
+
+
+int comparer_semaines_et_annees(premier_niveau_t * courant, premier_niveau_t * nouveau_bloc)
+{
+    char * courant_semaine = retourner_debut_chaine((*courant).semaine, TAILLE_SEMAINE);
+    char * courant_annee = retourner_debut_chaine((*courant).annee, TAILLE_ANNEE);
+    char * nouveau_semaine = retourner_debut_chaine((*nouveau_bloc).semaine, TAILLE_SEMAINE);
+    char * nouveau_annee = retourner_debut_chaine((*nouveau_bloc).annee, TAILLE_ANNEE);
+    int comparaison_semaine = strncmp(nouveau_semaine, courant_semaine, TAILLE_SEMAINE);
+    int comparaison_annee = strncmp(nouveau_annee, courant_annee, TAILLE_ANNEE);
+    int resultat = 0;
+    //si même jours
+    if (comparaison_annee == 0) {
+        //si même heure
+        if (comparaison_semaine == 0) {
+            //même date
+            resultat = 1;
+        } else if (comparaison_semaine > 0) {
+            //date du courant < date du nouveau bloc
+            resultat = 2;
+        } else {
+            //date du courant > date du nouveau bloc
+            resultat = 3;
+        }
+    } else {
+        if (comparaison_annee > 0) {
+            //date du courant < date du nouveau bloc
+            resultat = 2;
+        } else {
+            //date du courant > date du nouveau bloc
+            resultat = 3;
+        }
+    }
+    return resultat;
 }
