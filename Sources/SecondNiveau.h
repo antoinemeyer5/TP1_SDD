@@ -43,10 +43,17 @@ void afficher_second_niveau(second_niveau_t *);
 /* -------------------------------------------------------- */
 void rechercher_motif_second_niveau(char [], char [], second_niveau_t *);
 
-//
+/* -------------------------------------------------------- */
+/* TODO                                                     */                                                       
+/* -------------------------------------------------------- */
 void remplir_informations_second_niveau(second_niveau_t *, char *, char *, char *);
 
-//
+/* -------------------------------------------------------- */
+/* TODO                                                     */                                                       
+/* -------------------------------------------------------- */
 int ajouter_DN_bon_endroit(second_niveau_t **, second_niveau_t *);
 
+/* -------------------------------------------------------- */
+/* TODO                                                     */                                                       
+/* -------------------------------------------------------- */
 int comparer_heures_et_jours(second_niveau_t *, second_niveau_t *);

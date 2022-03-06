@@ -3,9 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 
-//fonction qui prend un string et un nombre de caractère à afficher et les affichent
-// sera utile pour annee et semaine mais surtout pour le nom qui ne doit pas avoir de \0 à la fin
-
 /* -------------------------------------------------------- */
 /* allouer_premier_niveau  Alloue l'espace mémoire pour un  */
 /*                         élément de type second_niveau_t  */
@@ -68,8 +65,6 @@ char * retourner_debut_chaine(char mot[], int taille_mot)
     return resultat;
 }
 
-//le premier caractere est a la place 0
-
 /* -------------------------------------------------------- */
 /* retourner_milieu_chaine    Copie les éléments d'une      */
 /*                            chaine de caractères de début */
@@ -105,16 +100,12 @@ char * retourner_milieu_chaine(char mot[], int debut, int fin)
 /* -------------------------------------------------------- */
 int exister_dans_premier_niveau(premier_niveau_t * bloc, char * annee, char * semaine)
 {
-    int existe = 0;
-    // regarde dans un bloc n1 si son annee et sa semaine sont egales
-    // aux parametres 
+    int existe = 0; 
     if (strncmp(retourner_debut_chaine((*bloc).annee, TAILLE_ANNEE), annee, TAILLE_ANNEE) == 0 ) {
         if (strncmp((*bloc).semaine, semaine, TAILLE_SEMAINE) == 0) {
             existe = 1;
         }
     }
-    // retourne 0 si pas egale
-    // retourne 1 si egale
     return existe;
 }
 
@@ -123,7 +114,6 @@ int exister_dans_premier_niveau(premier_niveau_t * bloc, char * annee, char * se
 /*                                   des dates avec         */
 /*                                   une action contenant   */
 /*                                   un motif donné         */
-/*                                                          */
 /*                                                          */
 /* En entrée : motif, Chaine de caractères à chercher       */
 /*             liste, Pointeur d'une liste d'actions        */
@@ -163,7 +153,9 @@ void rechercher_motif_premier_niveau(char liste_dates[], char motif[], premier_n
     liste_dates[deb] = '\0';
 }
 
-//
+/* -------------------------------------------------------- */
+/* TODO                                                     */                                                       
+/* -------------------------------------------------------- */
 void remplir_informations_premier_niveau(premier_niveau_t * tete_liste, char * annee, char * semaine)
 {
     strcpy((*tete_liste).annee, annee);
@@ -173,18 +165,7 @@ void remplir_informations_premier_niveau(premier_niveau_t * tete_liste, char * a
 }
 
 /* -------------------------------------------------------- */
-/* ajouter_tri_croissant_premier_niveau Ajoute dans la liste*/
-/*                                      au bon endroit en   */
-/*                                      gardant le tri      */
-/*                                      croissant           */
-/*                                                          */
-/* En entrée : nouveau_bloc, Pointeur à ajouter à la liste  */
-/*                                                          */
-/* En entrée/sortie : tete_liste, Pointeur de la liste à    */
-/*                    laquelle on veut ajouter un bloc      */
-/*                                                          */
-/* En sortie : code, Entier valant 1 si l'ajout s'est bien  */
-/*             passée; 0 sinon                              */                                                       
+/* TODO                                                     */                                                       
 /* -------------------------------------------------------- */
 int ajouter_PN_bon_endroit(premier_niveau_t ** tete_liste, premier_niveau_t * nouvel_element)  
 {
@@ -207,10 +188,9 @@ int ajouter_PN_bon_endroit(premier_niveau_t ** tete_liste, premier_niveau_t * no
     return code;
 }
 
-
-//void afficher_premier_niveau(premier_niveau_t * tete_liste){}
-
-
+/* -------------------------------------------------------- */
+/* TODO                                                     */
+/* -------------------------------------------------------- */
 int comparer_semaines_et_annees(premier_niveau_t * courant, premier_niveau_t * nouveau_bloc)
 {
     char * courant_semaine = retourner_debut_chaine((*courant).semaine, TAILLE_SEMAINE);
@@ -220,9 +200,7 @@ int comparer_semaines_et_annees(premier_niveau_t * courant, premier_niveau_t * n
     int comparaison_semaine = strncmp(nouveau_semaine, courant_semaine, TAILLE_SEMAINE);
     int comparaison_annee = strncmp(nouveau_annee, courant_annee, TAILLE_ANNEE);
     int resultat = 0;
-    //si même jours
     if (comparaison_annee == 0) {
-        //si même heure
         if (comparaison_semaine == 0) {
             //même date
             resultat = 1;

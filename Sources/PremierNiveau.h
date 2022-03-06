@@ -32,9 +32,9 @@ int allouer_premier_niveau(premier_niveau_t **);
 int ajouter_en_tete_premier_niveau(premier_niveau_t **, premier_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* retourner_debut_chaine    Copie un mot dans une          */
-/*                           nouvelle chaine de             */
-/*                           caractères                     */
+/* exister_dans_premier_niveau   Retourne 1 si l'année      */
+/*                               et la semaine demandées    */
+/*                               existent                   */
 /* -------------------------------------------------------- */
 int exister_dans_premier_niveau(premier_niveau_t *, char *, char *);
 
@@ -44,14 +44,14 @@ int exister_dans_premier_niveau(premier_niveau_t *, char *, char *);
 /*                            à fin dans une nouvelle       */
 /*                            chaine de caractères          */
 /* -------------------------------------------------------- */
-char * retourner_debut_chaine(char[], int);
+char * retourner_milieu_chaine(char[], int, int);
 
 /* -------------------------------------------------------- */
-/* exister_dans_premier_niveau   Retourne 1 si l'année      */
-/*                               et la semaine demandées    */
-/*                               existent                   */
+/* retourner_debut_chaine    Copie un mot dans une          */
+/*                           nouvelle chaine de             */
+/*                           caractères                     */
 /* -------------------------------------------------------- */
-char * retourner_milieu_chaine(char[], int, int);
+char * retourner_debut_chaine(char[], int);
 
 /* -------------------------------------------------------- */
 /* rechercher_motif_premier_niveau   Affiche la liste       */
@@ -62,20 +62,16 @@ char * retourner_milieu_chaine(char[], int, int);
 void rechercher_motif_premier_niveau(char[], char[], premier_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* afficher_premier_niveau  Affiche les informations de     */
-/*                          la semaine                      */
+/* TODO                                                     */                                                       
 /* -------------------------------------------------------- */
-//void afficher_premier_niveau(premier_niveau_t *);
-
-//
 void remplir_informations_premier_niveau(premier_niveau_t *, char *, char *);
 
 /* -------------------------------------------------------- */
-/* ajouter_tri_croissant    Ajoute dans la liste au bon     */
-/*                          endroit en gardant le tri       */
-/*                          croissant                       */
+/* TODO                                                     */                                                       
 /* -------------------------------------------------------- */
 int ajouter_PN_bon_endroit(premier_niveau_t **, premier_niveau_t *);
 
-
+/* -------------------------------------------------------- */
+/* TODO                                                     */                                                       
+/* -------------------------------------------------------- */
 int comparer_semaines_et_annees(premier_niveau_t *, premier_niveau_t *);

@@ -60,7 +60,6 @@ void afficher_second_niveau(second_niveau_t * tete_liste)
 {
     second_niveau_t * courant = tete_liste;
     while (courant != NULL) {
-        // Affichage des informations d'une action
         printf("-> Jour ");
         afficher_chaine((*courant).jour, TAILLE_JOUR);
         printf(" à ");
@@ -123,6 +122,8 @@ void rechercher_motif_second_niveau(char liste_jours[], char motif[], second_niv
 }
 
 /* -------------------------------------------------------- */
+/* TODO                                                     */                                                       
+/* -------------------------------------------------------- */
 void remplir_informations_second_niveau(second_niveau_t * tete_liste, char * jour, char * heure, char * nom_action)
 {
     strncpy((*tete_liste).jour, jour, TAILLE_JOUR);
@@ -131,6 +132,9 @@ void remplir_informations_second_niveau(second_niveau_t * tete_liste, char * jou
     (*tete_liste).suivant = NULL;
 }
 
+/* -------------------------------------------------------- */
+/* TODO                                                     */  
+/* En entrée/sortie : tete_liste, ....  */                                                     
 /* -------------------------------------------------------- */
 int ajouter_DN_bon_endroit(second_niveau_t ** tete_liste, second_niveau_t * nouveau_bloc)
 {
@@ -154,6 +158,9 @@ int ajouter_DN_bon_endroit(second_niveau_t ** tete_liste, second_niveau_t * nouv
     return code;
 }
 
+/* -------------------------------------------------------- */
+/* TODO                                                     */                                                       
+/* -------------------------------------------------------- */
 int comparer_heures_et_jours(second_niveau_t * courant, second_niveau_t * nouveau_bloc)
 {
     // résultat des comparaisons

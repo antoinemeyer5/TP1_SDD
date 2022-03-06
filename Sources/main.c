@@ -9,10 +9,9 @@ int main(int argc, char * argv[])
     int a;
     printf("Il y a %d argument(s)\n", argc);
     a = allouer_premier_niveau(&agenda);
+    printf("a = %d : allouer premier niveau\n", a);
     a = remplir_agenda(argv[1], &agenda);
-    printf("\na = %d\n", a);
+    printf("a = %d : remplir l'agenda\n", a);
     afficher_agenda(agenda);
-    /*printf("==================\n");
-    afficher_agenda(agenda);*/
     return 0;
 }

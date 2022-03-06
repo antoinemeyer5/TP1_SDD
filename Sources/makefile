@@ -1,10 +1,10 @@
 CC=gcc
 main_tests:../Tests/TestsCodes.o OutilsCommuns.o PremierNiveau.o SecondNiveau.o ../Tests/teZZt.o
 	$(CC) -o main_tests ../Tests/TestsCodes.o OutilsCommuns.o PremierNiveau.o SecondNiveau.o ../Tests/teZZt.o -lm 
-	@echo "Lancer les tests avec  ./main_tests" 
+	@echo "=> Lancer les tests avec  ./main_tests" 
 main:main.o OutilsCommuns.o PremierNiveau.o SecondNiveau.o ../Tests/teZZt.o
 	$(CC) -o main main.o OutilsCommuns.o PremierNiveau.o SecondNiveau.o ../Tests/teZZt.o -lm 
-	@echo "Lancer le programme avec  ./main" 
+	@echo "=> Lancer le programme avec  ./main" 
 
 teZZt.o:../Tests/teZZt.c ../Tests/teZZt.h
 	$(CC) -c ../Tests/teZZt.c -o ../Tests.teZZt.o
