@@ -72,6 +72,6 @@ void remplir_informations_premier_niveau(premier_niveau_t *, char *, char *);
 int ajouter_PN_bon_endroit(premier_niveau_t **, premier_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */                                                       
+/* TODO                                                     */
 /* -------------------------------------------------------- */
 int comparer_semaines_et_annees(premier_niveau_t *, premier_niveau_t *);

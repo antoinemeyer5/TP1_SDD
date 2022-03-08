@@ -24,6 +24,18 @@ TEST(ALLOUER_PREMIER_NIVEAU, "")
 /* -------------------------------------------------------- */
 /* TESTS AJOUTS PREMIER ET SECOND NIVEAU                    */
 /* -------------------------------------------------------- */
+/*TEST(AJOUTER_EN_TETE_PREMIER_NIVEAU, "")
+{
+    premier_niveau_t * agenda = NULL;
+    premier_niveau_t * nouvel_element;
+    int code_ajouter_en_tete_premier_niveau;
+    remplir_informations_premier_niveau(nouvel_element, "2000", "14");
+    allouer_premier_niveau(&agenda);
+    code_ajouter_en_tete_premier_niveau = ajouter_en_tete_premier_niveau(&agenda, nouvel_element);
+    CHECK(1 == code_ajouter_en_tete_premier_niveau);
+    afficher_agenda(agenda);
+    //CHECK()
+}*/
 //int ajouter_en_tete_premier_niveau(premier_niveau_t ** tete_liste, premier_niveau_t * nouvel_element)
 //int ajouter_en_tete_second_niveau(second_niveau_t ** tete_liste, second_niveau_t * nouveau_bloc)
 
@@ -32,6 +44,27 @@ TEST(ALLOUER_PREMIER_NIVEAU, "")
 /* -------------------------------------------------------- */
 /* TESTS COMPARAISONS SEMAINES, JOURS, ETC                  */
 /* -------------------------------------------------------- */
+TEST(COMPARER_SEMAINES_ET_ANNEES, "")
+{
+    premier_niveau_t * semaine_1 = NULL, * semaine_2 = NULL;
+    int code_comparer_semaines_et_annees = 0;
+    allouer_premier_niveau(&semaine_1);
+    allouer_premier_niveau(&semaine_2);
+    //même semaine et même année
+    remplir_informations_premier_niveau(semaine_1, "2010", "05");
+    remplir_informations_premier_niveau(semaine_2, "2010", "05");
+    code_comparer_semaines_et_annees = comparer_semaines_et_annees(semaine_1, semaine_2);
+    CHECK(1 == code_comparer_semaines_et_annees);
+
+    //même semaine et même année
+    remplir_informations_premier_niveau(semaine_1, "2010", "05");
+    remplir_informations_premier_niveau(semaine_2, "2020", "05");
+    code_comparer_semaines_et_annees = comparer_semaines_et_annees(semaine_1, semaine_2);
+    CHECK(2 == code_comparer_semaines_et_annees);
+
+
+}
+
 //int comparer_semaines_et_annees(premier_niveau_t * courant, premier_niveau_t * nouveau_bloc)
 //int comparer_heures_et_jours(second_niveau_t * courant, second_niveau_t * nouveau_bloc)
 

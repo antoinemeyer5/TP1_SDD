@@ -142,3 +142,78 @@ premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t * te
     }
     return semaine_retour;
 }
+
+/* -------------------------------------------------------- */
+/* TODO                                                     */
+/* -------------------------------------------------------- */
+int supprimer_action(premier_niveau_t ** agenda, char * annee, char * semaine, char * jour, char * heure)
+{
+    premier_niveau_t ** semaine_precedente = agenda;
+    premier_niveau_t ** semaine_courante = &(*agenda)->suivant;
+    //faire un pointeur simple pour le courant
+    premier_niveau_t * nouveau_bloc = NULL;
+
+    second_niveau_t ** action_courante = NULL;
+    second_niveau_t ** action_precedente = NULL;
+    second_niveau_t * nouvelle_action = NULL;
+
+    int a;
+    printf("début suppresion ...\n");
+    a = allouer_premier_niveau(&nouveau_bloc);
+    printf("a = %d\n", a);
+    remplir_informations_premier_niveau(nouveau_bloc, annee, semaine);
+    //tant qu'on n'a pas trouvé la semaine (premier niveau) à supprimer on avance
+    while (*semaine_courante && comparer_semaines_et_annees(*semaine_courante, nouveau_bloc) != 1) {
+        semaine_precedente = semaine_courante;
+        semaine_courante = &(*semaine_courante)->suivant;
+    }
+    //si on trouve le premier niveau
+    if (*semaine_courante) {
+        printf("[X] semaine trouvée\n");
+        //printf("semaine trouvee :%s; :%s\n", (*semaine_courante)->annee, (*semaine_courante)->semaine);
+        action_courante = &(*semaine_courante)->actions;
+        action_precedente = action_courante;
+        //on alloue l'action qu'on cherche
+        a = allouer_second_niveau(&nouvelle_action);
+        remplir_informations_second_niveau(nouvelle_action, jour, heure, "vide");
+        //tant qu'on n'a pas trouvé l'action (deuxième niveau) à supprimer on avance
+        while (*action_courante && comparer_heures_et_jours(*action_courante, nouvelle_action) != 1) {
+            //printf("action pre jour :%s; action pre heure:%s\n", (*action_courante)->jour, (*action_courante)->heure);
+            action_precedente = action_courante;
+            action_courante = &(*action_courante)->suivant;
+        }
+        //si on trouve le deuxième niveau
+        if (*action_courante) {
+            printf("[X] action trouvée\n");
+            //printf("action trouvee :%s; %s\n", (*action_courante)->jour, (*action_courante)->heure);
+            //on change le suivant
+            if (action_courante == &(*semaine_courante)->actions) {
+                (*semaine_courante)->actions = (*action_courante)->suivant;
+            } else {
+                (*action_precedente)->suivant = (*action_courante)->suivant;
+            }
+            printf("oui\n"); 
+            //on supprime le 2eme niveau
+            free(*action_courante);
+            //si le premier niveau est vide
+            /*if ((*semaine_courante)->actions == NULL ) {
+                //on change le suivant et
+                (*semaine_precedente)->suivant = (*semaine_courante)->suivant;
+                //on supprime le 1er niveau
+                free(*semaine_courante);
+            }*/
+        } else {
+            printf("[ ] action trouvée\n");
+        }  
+        //on déalloue l'action qu'on cherche
+        free(nouvelle_action);      
+    }
+    //on déalloue la semaine qu'on cherche
+    free(nouveau_bloc);
+
+    printf("suppresion finie.\n");
+    //return 0 si mal passée
+    //return 1 si on a supprime quelque chose
+    //return -1 si on n'a rien supprimé
+    return 0;
+}

@@ -21,3 +21,8 @@ int remplir_agenda(char *, premier_niveau_t **);
 /*                                          semaine existe  */
 /*                                          déjà            */
 premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t *, char *, char *);
+
+/* -------------------------------------------------------- */
+/* TODO                                                     */
+/* -------------------------------------------------------- */
+int supprimer_action(premier_niveau_t **, char *, char *, char *, char *);

@@ -60,12 +60,13 @@ void afficher_second_niveau(second_niveau_t * tete_liste)
 {
     second_niveau_t * courant = tete_liste;
     while (courant != NULL) {
-        printf("-> Jour ");
+        printf(" -> Jour ");
         afficher_chaine((*courant).jour, TAILLE_JOUR);
         printf(" à ");
         afficher_chaine((*courant).heure, TAILLE_HEURE);
         printf("h faire : ");
         afficher_chaine((*courant).nom, TAILLE_NOM_ACTION);
+        //if (strlen((*courant).nom) == TAILLE_NOM_ACTION && strcmp(&(*courant).nom[TAILLE_NOM_ACTION-1], "\n")) {
         // Passage à l'action suivante dans la liste des actions
         courant = (*courant).suivant;
     }
