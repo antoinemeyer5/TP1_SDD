@@ -197,7 +197,14 @@ int comparer_heures_et_jours(second_niveau_t * courant, second_niveau_t * nouvea
 }
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */
+/* supprimer_SN       Supprime une action donnée dans       */
+/*                    une liste d'actions                   */
+/* En entrée : jour,     Chaîne représentant le jour de     */
+/*                       l'action à supprimer               */
+/*             heure,    Chaîne représentant l'heure de     */
+/*                       l'action à supprimer               */ 
+/* En entrée/sortie : tete_liste, Pointeur d'une liste      */
+/*                                d'actions                 */
 /* -------------------------------------------------------- */
 second_niveau_t * supprimer_SN(second_niveau_t * tete_liste, char * jour, char * heure)
 {

@@ -59,6 +59,7 @@ int ajouter_SN_bon_endroit(second_niveau_t **, second_niveau_t *);
 int comparer_heures_et_jours(second_niveau_t *, second_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */ 
+/* supprimer_SN       Supprime une action donnée dans       */
+/*                    une liste d'actions                   */
 /* -------------------------------------------------------- */
 second_niveau_t * supprimer_SN(second_niveau_t *, char *, char *);

@@ -23,15 +23,13 @@ int remplir_agenda(char *, premier_niveau_t **);
 premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t *, char *, char *);
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */
+/* supprimer_action   Supprime une action donnée dans       */
+/*                    l'agenda                              */
 /* -------------------------------------------------------- */
 int supprimer_action(premier_niveau_t **, char *, char *, char *, char *);
 
 /* -------------------------------------------------------- */
 /* sauvegarder_agenda         Sauvegarde un agenda          */
 /*                            dans un fichier               */
-/* En entrée : fichier_a_remplir, Fichier à remplir         */
-/*             agenda,  Pointeur de tête de l'agenda        */
-/* En sortie : Rien                                         */
 /* -------------------------------------------------------- */
 void sauvegarder_agenda(char *, premier_niveau_t *);

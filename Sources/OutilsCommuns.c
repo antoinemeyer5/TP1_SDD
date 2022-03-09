@@ -122,8 +122,8 @@ int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
 /*                                          semaine existe  */
 /*                                          déjà            */
 /*                                                          */
-/* En entrée : tete_agenda, Pointeur de tête de l'agenda que*/
-/*             l'on étudie                                  */
+/* En entrée : tete_agenda, Pointeur de tête de l'agenda    */
+/*             étudié                                       */
 /*             annee, Chaîne représentant l'année           */
 /*             semaine, Chaîne représentant la semaine      */
 /*                                                          */
@@ -144,7 +144,19 @@ premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t * te
 }
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */
+/* supprimer_action   Supprime une action donnée dans       */
+/*                    l'agenda                              */
+/* En entrée : agenda, Pointeur indirect de tête de         */
+/*                     l'agenda étudié                      */
+/*             annee, Chaîne représentant l'année de        */
+/*                    l'action à supprimer                  */
+/*             semaine, Chaîne représentant la semaine de   */
+/*                      l'action à supprimer                */
+/*             jour, Chaîne représentant le jour de         */
+/*                   l'action à supprimer                   */
+/*             heure, Chaîne représentant l'heure de        */
+/*                    l'action à supprimer                  */ 
+/* En sortie : 0                                            */
 /* -------------------------------------------------------- */
 int supprimer_action(premier_niveau_t ** agenda, char * annee, char * semaine, char * jour, char * heure)
 {
@@ -196,7 +208,7 @@ int supprimer_action(premier_niveau_t ** agenda, char * annee, char * semaine, c
 /* sauvegarder_agenda         Sauvegarde un agenda          */
 /*                            dans un fichier               */
 /* En entrée : fichier_a_remplir, Fichier à remplir         */
-/*             agenda,  Pointeur de tête de l'agenda        */
+/*             agenda, Pointeur de tête de l'agenda        */
 /* En sortie : Rien                                         */
 /* -------------------------------------------------------- */
 void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
