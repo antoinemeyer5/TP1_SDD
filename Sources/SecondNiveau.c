@@ -137,7 +137,7 @@ void remplir_informations_second_niveau(second_niveau_t * tete_liste, char * jou
 /* TODO                                                     */  
 /* En entrée/sortie : tete_liste, ....  */                                                     
 /* -------------------------------------------------------- */
-int ajouter_DN_bon_endroit(second_niveau_t ** tete_liste, second_niveau_t * nouveau_bloc)
+int ajouter_SN_bon_endroit(second_niveau_t ** tete_liste, second_niveau_t * nouveau_bloc)
 {
     int code = 1;
     int trouve = 0;
@@ -160,7 +160,7 @@ int ajouter_DN_bon_endroit(second_niveau_t ** tete_liste, second_niveau_t * nouv
 }
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */                                                       
+/* TODO                                                     */
 /* -------------------------------------------------------- */
 int comparer_heures_et_jours(second_niveau_t * courant, second_niveau_t * nouveau_bloc)
 {
@@ -195,4 +195,38 @@ int comparer_heures_et_jours(second_niveau_t * courant, second_niveau_t * nouvea
         }
     }
     return resultat;
+}
+
+/* -------------------------------------------------------- */
+/* TODO                                                     */
+/* -------------------------------------------------------- */
+second_niveau_t * supprimer_SN(second_niveau_t * tete_liste, char * jour, char * heure)
+{
+    second_niveau_t ** action_precedente = &tete_liste;
+    second_niveau_t * nouvelle_action = NULL;
+    second_niveau_t * tmp;
+    int a;
+    //on alloue l'action qu'on cherche
+    a = allouer_second_niveau(&nouvelle_action);
+    remplir_informations_second_niveau(nouvelle_action, jour, heure, "vide");
+    //tant qu'on n'a pas trouvé l'action (deuxième niveau) à supprimer on avance
+    while (*action_precedente != NULL && comparer_heures_et_jours(*action_precedente, nouvelle_action) != 1) {
+        //printf("action pre jour :%s; action pre heure:%s\n", (*action_courante)->jour, (*action_courante)->heure);
+        action_precedente = &(*action_precedente)->suivant;
+    }
+    //si on trouve le deuxième niveau
+    if (action_precedente) {
+        printf("[X] action trouvée\n");
+        printf("action trouvee :%s; %s\n", (*action_precedente)->jour, (*action_precedente)->heure);
+        //on change le suivant
+        tmp = *action_precedente;
+        *action_precedente = (*action_precedente)->suivant;
+        //on supprime le 2eme niveau
+        free(tmp);
+        //on déalloue l'action qu'on cherche
+        free(nouvelle_action); 
+    } else {
+        printf("[ ] action trouvée\n");
+    }  
+    return tete_liste;
 }

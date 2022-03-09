@@ -51,9 +51,14 @@ void remplir_informations_second_niveau(second_niveau_t *, char *, char *, char 
 /* -------------------------------------------------------- */
 /* TODO                                                     */                                                       
 /* -------------------------------------------------------- */
-int ajouter_DN_bon_endroit(second_niveau_t **, second_niveau_t *);
+int ajouter_SN_bon_endroit(second_niveau_t **, second_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */                                                       
+/* TODO                                                     */
 /* -------------------------------------------------------- */
 int comparer_heures_et_jours(second_niveau_t *, second_niveau_t *);
+
+/* -------------------------------------------------------- */
+/* TODO                                                     */ 
+/* -------------------------------------------------------- */
+second_niveau_t * supprimer_SN(second_niveau_t *, char *, char *);

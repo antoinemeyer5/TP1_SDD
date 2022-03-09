@@ -6,10 +6,10 @@ int main(int argc, char * argv[])
 {
     premier_niveau_t * agenda;
     agenda = NULL;
-    char *sup_annee = "1913";
+    char *sup_annee = "1912";
     char *sup_semaine = "16";
     char *sup_jour = "4";
-    char *sup_heure = "15";
+    char *sup_heure = "18";
     int a;
     printf("Il y a %d argument(s)\n", argc);
     a = allouer_premier_niveau(&agenda);
