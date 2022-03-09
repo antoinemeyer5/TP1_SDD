@@ -129,20 +129,20 @@ void rechercher_motif_premier_niveau(char liste_dates[], char motif[], premier_n
 
     while (liste != NULL) {
         rechercher_motif_second_niveau(liste_jours, motif, (*liste).actions);
+        printf("jours : %s\n", liste_jours);
         k = 0;
 
-        while (liste_jours[0] != '\0') {
+        while (liste_jours[k] != '\0') {
             for (int i=0; i<TAILLE_ANNEE; i++) {
-                liste_dates[deb+i] = (*liste).annee[i];
+                liste_dates[deb] = (*liste).annee[i];
+                deb++;
             }
-
-            deb += TAILLE_ANNEE;
 
             for (int j=0; j<TAILLE_SEMAINE; j++) {
-                liste_dates[deb+j] = (*liste).semaine[j];
+                liste_dates[deb] = (*liste).semaine[j];
+                deb++;
             }
 
-            deb += TAILLE_SEMAINE;
             liste_dates[deb] = liste_jours[0];
             liste_jours[0] = liste_jours[k];
             k++;

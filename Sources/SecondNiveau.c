@@ -118,8 +118,7 @@ void rechercher_motif_second_niveau(char liste_jours[], char motif[], second_niv
         liste = (*liste).suivant;
     }
     liste_jours[deb] = '\0';
-    //printf("%s\n", liste_jours);
-    //return liste_jours;
+    printf("%s\n", liste_jours);
 }
 
 /* -------------------------------------------------------- */

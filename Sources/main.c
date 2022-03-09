@@ -1,6 +1,7 @@
 #include "OutilsCommuns.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*int main(int argc, char * argv[])
 {
@@ -79,13 +80,12 @@ int main(int argc, char * argv[])
     printf("a = %d\n", a);
     a = ajouter_en_tete_second_niveau(&ActiTete1, Acti2);
     printf("a = %d\n", a);
+
+    (*Acti1).suivant = NULL;
     
     (*Elem1).actions = ActiTete1;
 
     afficher_agenda(TeteListe);
-
-    char * fichier = "fi_2.txt";
-    sauvegarder_agenda(fichier, TeteListe);
 
     return 0;
 }

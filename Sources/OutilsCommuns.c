@@ -197,23 +197,20 @@ int supprimer_action(premier_niveau_t ** agenda, char * annee, char * semaine, c
 /*                            dans un fichier               */
 /* En entrée : fichier_a_remplir, Fichier à remplir         */
 /*             agenda,  Pointeur de tête de l'agenda        */
-/* En sortie : Rien
+/* En sortie : Rien                                         */
 /* -------------------------------------------------------- */
 void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
 {
     int deb;
-    char * tache;
-
+    char tache[TAILLE_ANNEE+TAILLE_SEMAINE+TAILLE_JOUR+TAILLE_HEURE+TAILLE_NOM_ACTION+2];
     second_niveau_t * action;
-
     FILE * fichier = NULL;
     fichier = fopen(fichier_a_remplir, "w");
 
     while (agenda != NULL) {
         action = (*agenda).actions;
-        
 
-        while (action != NULL && (*action).nom != NULL) {
+        while (action != NULL) {
             deb = 0;
             printf("action : %s\n", action);
             printf("Hello\n");
@@ -231,9 +228,14 @@ void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
             tache[deb] = (*action).jour[0];
             deb++;
 
+            for (int i=0; i<TAILLE_JOUR; i++) {
+                tache[deb] = (*action).jour[i];
+                deb++;
+            }
+
             printf("heure : %s\n", (*action).heure);
 
-            /*for (int i=0; i<TAILLE_HEURE-1; i++) {
+            for (int i=0; i<TAILLE_HEURE; i++) {
                 tache[deb] = (*action).heure[i];
                 deb++;
             }
@@ -241,7 +243,7 @@ void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
             for (int i=0; i<TAILLE_NOM_ACTION; i++) {
                 tache[deb] = (*action).nom[i];
                 deb++;
-            }*/
+            }
 
             tache[deb] = '\n';
             tache[deb+1] = '\0';
@@ -251,6 +253,7 @@ void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
             fprintf(fichier, "%s", tache);
 
             action = (*action).suivant;
+            printf("tac\n");
         }
 
         agenda = (*agenda).suivant;

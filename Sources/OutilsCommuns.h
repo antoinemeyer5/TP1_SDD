@@ -32,6 +32,6 @@ int supprimer_action(premier_niveau_t **, char *, char *, char *, char *);
 /*                            dans un fichier               */
 /* En entrée : fichier_a_remplir, Fichier à remplir         */
 /*             agenda,  Pointeur de tête de l'agenda        */
-/* En sortie : Rien
+/* En sortie : Rien                                         */
 /* -------------------------------------------------------- */
 void sauvegarder_agenda(char *, premier_niveau_t *);
