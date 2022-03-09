@@ -191,3 +191,70 @@ int supprimer_action(premier_niveau_t ** agenda, char * annee, char * semaine, c
     //return -1 si on n'a rien supprimé
     return 0;
 }
+
+/* -------------------------------------------------------- */
+/* sauvegarder_agenda         Sauvegarde un agenda          */
+/*                            dans un fichier               */
+/* En entrée : fichier_a_remplir, Fichier à remplir         */
+/*             agenda,  Pointeur de tête de l'agenda        */
+/* En sortie : Rien
+/* -------------------------------------------------------- */
+void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
+{
+    int deb;
+    char * tache;
+
+    second_niveau_t * action;
+
+    FILE * fichier = NULL;
+    fichier = fopen(fichier_a_remplir, "w");
+
+    while (agenda != NULL) {
+        action = (*agenda).actions;
+        
+
+        while (action != NULL && (*action).nom != NULL) {
+            deb = 0;
+            printf("action : %s\n", action);
+            printf("Hello\n");
+
+            for (int i=0; i<TAILLE_ANNEE; i++) {
+                tache[deb] = (*agenda).annee[i];
+                deb++;
+            }
+
+            for (int i=0; i<TAILLE_SEMAINE; i++) {
+                tache[deb] = (*agenda).semaine[i];
+                deb++;
+            }
+
+            tache[deb] = (*action).jour[0];
+            deb++;
+
+            printf("heure : %s\n", (*action).heure);
+
+            /*for (int i=0; i<TAILLE_HEURE-1; i++) {
+                tache[deb] = (*action).heure[i];
+                deb++;
+            }
+
+            for (int i=0; i<TAILLE_NOM_ACTION; i++) {
+                tache[deb] = (*action).nom[i];
+                deb++;
+            }*/
+
+            tache[deb] = '\n';
+            tache[deb+1] = '\0';
+
+            printf("tache : %s\n", tache);
+
+            fprintf(fichier, "%s", tache);
+
+            action = (*action).suivant;
+        }
+
+        agenda = (*agenda).suivant;
+    }
+
+    fclose(fichier);
+}
