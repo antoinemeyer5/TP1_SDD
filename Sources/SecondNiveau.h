@@ -50,7 +50,7 @@ void afficher_second_niveau(second_niveau_t *);
 void rechercher_motif_second_niveau(char [], char [], second_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* remplir_informations_second_niveau   Remplis la liste    */
+/* remplir_informations_second_niveau   Remplie la liste    */
 /*                                      avec les éléments   */
 /*                                      entrés              */                                                      
 /* -------------------------------------------------------- */

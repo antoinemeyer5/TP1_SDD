@@ -24,6 +24,7 @@ int remplir_agenda(char *, premier_niveau_t **);
 /* retourner_semaine_existante_dans_agenda  Test si une     */
 /*                                          semaine existe  */
 /*                                          déjà            */
+/* -------------------------------------------------------- */
 premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t *, char *, char *);
 
 /* -------------------------------------------------------- */
