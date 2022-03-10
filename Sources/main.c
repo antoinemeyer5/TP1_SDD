@@ -34,7 +34,7 @@ int main(int argc, char * argv[])
     //supprimer action ok 
     //PROBLEME avec suppression de la semaine
 
-    char * fichier_lisible = "fi_3.txt";
+    char * fichier_lisible = "fi.txt";
     remplir_agenda(fichier_lisible, &agenda);
     afficher_agenda(agenda);
 
