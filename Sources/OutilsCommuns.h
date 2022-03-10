@@ -16,8 +16,7 @@ void afficher_chaine(char[], int);
 void afficher_agenda(premier_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* remplir_agenda   Fonction qui s'occupe de remplir un     */
-/*                  agenda à partir d'un fichier            */
+/* remplir_agenda   Remplir un agenda à partir d'un fichier */
 /* -------------------------------------------------------- */
 int remplir_agenda(char *, premier_niveau_t **);
 
