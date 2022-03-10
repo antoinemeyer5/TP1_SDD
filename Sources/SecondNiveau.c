@@ -1,3 +1,8 @@
+/* -------------------------------------------------------- */
+/* SecondNiveau.c : Contient l'ensemble des fonctions       */
+/*                  liées au second niveau                  */
+/* -------------------------------------------------------- */
+
 #include "OutilsCommuns.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -7,8 +12,8 @@
 /* allouer_second_niveau   Alloue l'espace mémoire pour un  */
 /*                         élément de type second_niveau_t  */
 /*                                                          */
-/* En entrée/sortie : tete_liste, Pointeur de début de      */
-/*                    l'espace mémoire alloué               */
+/* En entrée/sortie : tete_liste, Pointeur indirect de      */
+/*                    début de l'espace mémoire alloué      */
 /*                                                          */
 /* En sortie : code, Entier valant 1 si l'allocation s'est  */
 /*             bien passée; 0 sinon                         */
@@ -32,10 +37,12 @@ int allouer_second_niveau(second_niveau_t ** tete_liste)
 /* ajouter_en_tete_second_niveau    Ajoute en tête un bloc à*/
 /*                                  à la liste en paramètre */
 /*                                                          */
-/* En entrée : nouveau_bloc, Pointeur à ajouter à la liste  */
+/* En entrée : nouveau_bloc, Pointeur sur le bloc à ajouter */
+/*                           à la liste                     */
 /*                                                          */
-/* En entrée/sortie : tete_liste, Pointeur de la liste à    */
-/*                    laquelle on veut ajouter un bloc      */
+/* En entrée/sortie : tete_liste, Pointeur indirect de      */ 
+/*                                la liste à laquelle       */
+/*                                on veut ajouter un bloc   */
 /*                                                          */
 /* En sortie : code, Entier valant 1 si l'ajout s'est bien  */
 /*             passée; 0 sinon                              */
@@ -88,41 +95,49 @@ void rechercher_motif_second_niveau(char liste_jours[], char motif[], second_niv
 {
     int         i, j;
     int         deb = 0;
-    //char        liste_jours[7];
 
     while (liste != NULL) {
         i = 0;
         j = 0;
-        //printf("%c\n", (*liste).jour[0]);
-        //printf("%s\n", (*liste).nom);
+
+        //recherche du premier caractère du motif
         while (j<TAILLE_NOM_ACTION && (*liste).nom[j] != motif[0]) {
             j++;
-            //printf("j : %d\n", j);
         }
 
         if ((*liste).nom[j] == motif[0]) {
-            //printf("\nOn y est \n");
+            //recherche du motif
             while (j<TAILLE_NOM_ACTION && motif[i] != '\0' && (*liste).nom[j] == motif[i]) {
                 i++;
                 j++;
-                //printf("(j, i) : (%d %d)\n", j, i);
-                //printf("%c =? %c\n", (*liste).nom[j], motif[i]);
             }
 
+            //si le motif et le nom de l'action est le même, on ajoute le jour à la liste
             if (motif[i] == '\0') {
                 liste_jours[deb] = (*liste).jour[0];
                 deb++;
-                //printf("On a : %s", liste_jours);
             }
         }
         liste = (*liste).suivant;
     }
     liste_jours[deb] = '\0';
-    printf("%s\n", liste_jours);
 }
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */                                                       
+/* remplir_informations_second_niveau   Remplie la liste    */
+/*                                      avec les éléments   */
+/*                                      entrés              */
+/*                                                          */
+/* Entrée : jour, Chaine de caractères représentant         */
+/*                le jour qu'il faut écrire                 */
+/*          heure, Chaine de caractères représentant        */
+/*                 l'heure qu'il faut écrire                */
+/*          nom_action, Chaine de caractères représentant   */
+/*                      le nom de l'action qu'il faut       */
+/*                      écrire                              */
+/*                                                          */
+/* Entrée/Sortie : tete_liste, Pointeur sur la structure à  */
+/*                             remplir                      */                                                       
 /* -------------------------------------------------------- */
 void remplir_informations_second_niveau(second_niveau_t * tete_liste, char * jour, char * heure, char * nom_action)
 {
@@ -133,8 +148,17 @@ void remplir_informations_second_niveau(second_niveau_t * tete_liste, char * jou
 }
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */  
-/* En entrée/sortie : tete_liste, ....  */                                                     
+/* ajouter_SN_bon_endroit   Ajoute un bloc à l'emplacement  */
+/*                          demandé                         */
+/*                                                          */
+/* En entrée : nouveau_bloc, Pointeur de tête du bloc à     */
+/*                           placer                         */
+/*                                                          */ 
+/* En entrée/sortie : tete_liste, Pointeur indirect         */
+/*                                de l'emplacement demandé  */
+/*                                                          */
+/* En sortie : code, Entier valant 1 si l'ajout s'est bien  */
+/*             passée; 0 sinon                              */
 /* -------------------------------------------------------- */
 int ajouter_SN_bon_endroit(second_niveau_t ** tete_liste, second_niveau_t * nouveau_bloc)
 {
@@ -159,7 +183,20 @@ int ajouter_SN_bon_endroit(second_niveau_t ** tete_liste, second_niveau_t * nouv
 }
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */
+/* comparer_heures_et_jours    Compare l'heure et le jour   */
+/*                             de deux blocs                */
+/*                                                          */
+/* En entrée : courant, Pointeur de tête d'un bloc à        */
+/*                      comparer                            */
+/*             nouveau_bloc, Pointeur de tête de l'autre    */
+/*                           bloc à comparer                */
+/*                                                          */
+/* En sortie : resultat, Entier valant 1 si le jour et      */
+/*                       l'heure sont identiques;           */
+/*                       2 si le jour est identique mais    */
+/*                       l'heure du courant est inférieur à */
+/*                       l'autre ou si le jour du courant   */
+/*                       est inférieur à l'autre; 3 sinon   */
 /* -------------------------------------------------------- */
 int comparer_heures_et_jours(second_niveau_t * courant, second_niveau_t * nouveau_bloc)
 {
@@ -199,18 +236,20 @@ int comparer_heures_et_jours(second_niveau_t * courant, second_niveau_t * nouvea
 /* -------------------------------------------------------- */
 /* supprimer_SN       Supprime une action donnée dans       */
 /*                    une liste d'actions                   */
-/* En entrée : jour,     Chaîne représentant le jour de     */
-/*                       l'action à supprimer               */
-/*             heure,    Chaîne représentant l'heure de     */
-/*                       l'action à supprimer               */ 
+/*                                                          */
+/* En entrée : jour, Chaîne de caractères représentant      */
+/*                   le jour de l'action à supprimer        */
+/*             heure, Chaîne de caractères représentant     */
+/*                    l'heure de l'action à supprimer       */
+/*                                                          */
 /* En entrée/sortie : tete_liste, Pointeur d'une liste      */
 /*                                d'actions                 */
 /* -------------------------------------------------------- */
 second_niveau_t * supprimer_SN(second_niveau_t * tete_liste, char * jour, char * heure)
 {
     second_niveau_t ** action_precedente = &tete_liste;
-    second_niveau_t * nouvelle_action = NULL;
-    second_niveau_t * tmp;
+    second_niveau_t  * nouvelle_action = NULL;
+    second_niveau_t  * tmp;
     int a;
     //on alloue l'action qu'on cherche
     a = allouer_second_niveau(&nouvelle_action);

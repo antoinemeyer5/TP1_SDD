@@ -1,4 +1,10 @@
 /* -------------------------------------------------------- */
+/* SecondNiveau.h : Déclaration des types, constantes et    */
+/*                  prototypes                              */
+/* -------------------------------------------------------- */
+
+
+/* -------------------------------------------------------- */
 /* Constantes pour la taille des différents éléments de la  */
 /* structure                                                */
 /* -------------------------------------------------------- */
@@ -44,17 +50,21 @@ void afficher_second_niveau(second_niveau_t *);
 void rechercher_motif_second_niveau(char [], char [], second_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */                                                       
+/* remplir_informations_second_niveau   Remplis la liste    */
+/*                                      avec les éléments   */
+/*                                      entrés              */                                                      
 /* -------------------------------------------------------- */
 void remplir_informations_second_niveau(second_niveau_t *, char *, char *, char *);
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */                                                       
+/* ajouter_SN_bon_endroit   Ajoute un bloc à l'emplacement  */
+/*                          demandé                         */                                                       
 /* -------------------------------------------------------- */
 int ajouter_SN_bon_endroit(second_niveau_t **, second_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */
+/* comparer_heures_et_jours    Compare l'heure et le jour   */
+/*                             de deux blocs                */
 /* -------------------------------------------------------- */
 int comparer_heures_et_jours(second_niveau_t *, second_niveau_t *);
 

@@ -1,3 +1,8 @@
+/* -------------------------------------------------------- */
+/* PremierNiveau.c : Contient l'ensemble des fonctions      */
+/*                   liées à la liste du premier niveau     */
+/* -------------------------------------------------------- */
+
 #include "PremierNiveau.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -154,7 +159,17 @@ void rechercher_motif_premier_niveau(char liste_dates[], char motif[], premier_n
 }
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */                                                       
+/* remplir_informations_premier_niveau   Remplis la liste   */
+/*                                       avec les éléments  */
+/*                                       entrés             */
+/*                                                          */
+/* Entrée : annee, Chaine de caractères représentant        */
+/*                 l'année qu'il faut écrire                */
+/*          semaine, Chaine de caractères représentant      */
+/*                   la semaine qu'il faut écrire           */
+/*                                                          */
+/* Entrée/Sortie : tete_liste, Pointeur sur la structure à  */
+/*                             remplir                      */                                                       
 /* -------------------------------------------------------- */
 void remplir_informations_premier_niveau(premier_niveau_t * tete_liste, char * annee, char * semaine)
 {
@@ -165,7 +180,18 @@ void remplir_informations_premier_niveau(premier_niveau_t * tete_liste, char * a
 }
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */                                                       
+/* ajouter_PN_bon_endroit   Ajoute un élément de type       */
+/*                          premier_niveau_t à              */
+/*                          l'emplacement demandé           */
+/*                                                          */
+/* En entrée : nouveal_element, Pointeur de tête de         */
+/*                              l'élément à placer          */
+/*                                                          */ 
+/* En entrée/sortie : tete_liste, Pointeur indirect         */
+/*                                de l'emplacement demandé  */
+/*                                                          */
+/* En sortie : code, Entier valant 1 si l'ajout s'est bien  */
+/*             passée; 0 sinon                              */
 /* -------------------------------------------------------- */
 int ajouter_PN_bon_endroit(premier_niveau_t ** tete_liste, premier_niveau_t * nouvel_element)  
 {
@@ -189,7 +215,21 @@ int ajouter_PN_bon_endroit(premier_niveau_t ** tete_liste, premier_niveau_t * no
 }
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */
+/* comparer_semaines_et_annees    Compare la semaine et     */
+/*                                l'année de deux blocs     */
+/*                                                          */
+/* En entrée : courant, Pointeur de tête d'un bloc à        */
+/*                      comparer                            */
+/*             nouveau_bloc, Pointeur de tête de l'autre    */
+/*                           bloc à comparer                */
+/*                                                          */
+/* En sortie : resultat, Entier valant 1 si l'année et      */
+/*                       la semaine sont identiques;        */
+/*                       2 si l'année est identique mais    */
+/*                       la semaine du courant est          */
+/*                       inférieure à l'autre ou si l'année */
+/*                       du courant est inférieure à        */
+/*                       l'autre; 3 sinon                   */
 /* -------------------------------------------------------- */
 int comparer_semaines_et_annees(premier_niveau_t * courant, premier_niveau_t * nouveau_bloc)
 {

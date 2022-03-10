@@ -1,3 +1,8 @@
+/* -------------------------------------------------------- */
+/* PremierNiveau.h : Déclaration des types, constantes et   */
+/*                   prototypes                             */
+/* -------------------------------------------------------- */
+
 #include "SecondNiveau.h"
 #include <stdio.h>
 
@@ -62,16 +67,21 @@ char * retourner_debut_chaine(char[], int);
 void rechercher_motif_premier_niveau(char[], char[], premier_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */                                                       
+/* remplir_informations_premier_niveau   Remplis la liste   */
+/*                                       avec les éléments  */
+/*                                       entrés             */                                                     
 /* -------------------------------------------------------- */
 void remplir_informations_premier_niveau(premier_niveau_t *, char *, char *);
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */                                                       
+/* ajouter_PN_bon_endroit   Ajoute un élément de type       */
+/*                          premier_niveau_t à              */
+/*                          l'emplacement demandé           */                                                      
 /* -------------------------------------------------------- */
 int ajouter_PN_bon_endroit(premier_niveau_t **, premier_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */
+/* comparer_semaines_et_annees    Compare la semaine et     */
+/*                                l'année de deux blocs     */
 /* -------------------------------------------------------- */
 int comparer_semaines_et_annees(premier_niveau_t *, premier_niveau_t *);

@@ -1,3 +1,8 @@
+/* -------------------------------------------------------- */
+/* OutilsCommuns.c : Contient l'ensemble des fonctions      */
+/*                   liées à l'agenda                       */
+/* -------------------------------------------------------- */
+
 #include "OutilsCommuns.h"
 #include <stdlib.h>
 #include <string.h>
@@ -224,8 +229,6 @@ void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
 
         while (action != NULL) {
             deb = 0;
-            printf("action : %s\n", action);
-            printf("Hello\n");
 
             for (int i=0; i<TAILLE_ANNEE; i++) {
                 tache[deb] = (*agenda).annee[i];
@@ -245,8 +248,6 @@ void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
                 deb++;
             }
 
-            printf("heure : %s\n", (*action).heure);
-
             for (int i=0; i<TAILLE_HEURE; i++) {
                 tache[deb] = (*action).heure[i];
                 deb++;
@@ -260,16 +261,11 @@ void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
             tache[deb] = '\n';
             tache[deb+1] = '\0';
 
-            printf("tache : %s\n", tache);
-
             fprintf(fichier, "%s", tache);
 
             action = (*action).suivant;
-            printf("tac\n");
         }
-
         agenda = (*agenda).suivant;
     }
-
     fclose(fichier);
 }
