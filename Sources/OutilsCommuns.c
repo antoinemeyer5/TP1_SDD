@@ -72,7 +72,7 @@ void afficher_agenda(premier_niveau_t * tete_agenda)
 int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
 {
     int code = 1;
-    FILE * le_fichier = NULL;
+    FILE * le_fichier = fopen(fichier_lisible, "r");
     // Fixation de la taille d'une ligne d'un fichier à lire
     int taille_ligne = TAILLE_ANNEE + TAILLE_SEMAINE + TAILLE_JOUR + TAILLE_HEURE + TAILLE_NOM_ACTION + 3;
     char ligne_courante[taille_ligne];
@@ -84,10 +84,8 @@ int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
     char * l_jour, * l_heure, * l_nom_action;
     // Variable équivalente à un code de bon fonctionnement ou d'erreur
     int a;
-    // Ouverture du fichier à lire 
-    le_fichier = fopen(fichier_lisible, "r");
-    if(le_fichier != NULL){
-        while (fgets(ligne_courante, taille_ligne, le_fichier) != NULL) {
+    if(le_fichier){
+        while (!feof(le_fichier) && fgets(ligne_courante, taille_ligne, le_fichier) != NULL) {
             // Récupération des informations contenues dans une ligne du fichier
             l_annee = retourner_milieu_chaine(ligne_courante, 0, 4);
             l_semaine = retourner_milieu_chaine(ligne_courante, 4, 6);
@@ -207,7 +205,9 @@ int supprimer_action(premier_niveau_t ** agenda, char * annee, char * semaine, c
 void ecrire_ligne(FILE * fichier, char * chaine, int taille)
 {
     for (int i = 0; i < taille; i++) {
-        fprintf(fichier, "%c", chaine[i]);
+        if (chaine[i] != NULL && chaine[i] != '\n') {
+            fprintf(fichier, "%c", chaine[i]);
+        }
     }
 }
 
