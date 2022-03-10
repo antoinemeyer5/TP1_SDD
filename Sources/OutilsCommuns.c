@@ -240,9 +240,6 @@ void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
                 deb++;
             }
 
-            tache[deb] = (*action).jour[0];
-            deb++;
-
             for (int i=0; i<TAILLE_JOUR; i++) {
                 tache[deb] = (*action).jour[i];
                 deb++;
@@ -257,13 +254,16 @@ void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
                 tache[deb] = (*action).nom[i];
                 deb++;
             }
-
-            tache[deb] = '\n';
+            
             tache[deb+1] = '\0';
 
             fprintf(fichier, "%s", tache);
 
             action = (*action).suivant;
+
+            if (action != NULL) {
+                fprintf(fichier, "%c", '\n');
+            }
         }
         agenda = (*agenda).suivant;
     }
