@@ -166,13 +166,8 @@ premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t * te
 int supprimer_action(premier_niveau_t ** agenda, char * annee, char * semaine, char * jour, char * heure)
 {
     premier_niveau_t ** semaine_precedente = agenda;
-    //premier_niveau_t ** semaine_courante = &(*agenda)->suivant;
-    //faire un pointeur simple pour le courant
     premier_niveau_t * nouveau_bloc = NULL;
     premier_niveau_t * tmp2;
-
-    
-
     int a;
     printf("début suppresion ...\n");
     a = allouer_premier_niveau(&nouveau_bloc);
@@ -200,9 +195,6 @@ int supprimer_action(premier_niveau_t ** agenda, char * annee, char * semaine, c
             free(nouveau_bloc);
         }     
     }
-    
-
-    printf("suppresion finie.\n");
     //return 0 si mal passée
     //return 1 si on a supprime quelque chose
     //return -1 si on n'a rien supprimé
@@ -210,59 +202,43 @@ int supprimer_action(premier_niveau_t ** agenda, char * annee, char * semaine, c
 }
 
 /* -------------------------------------------------------- */
+/* TODO                                                     */
+/* -------------------------------------------------------- */
+void ecrire_ligne(FILE * fichier, char * chaine, int taille)
+{
+    for (int i = 0; i < taille; i++) {
+        fprintf(fichier, "%c", chaine[i]);
+    }
+}
+
+/* -------------------------------------------------------- */
 /* sauvegarder_agenda         Sauvegarde un agenda          */
 /*                            dans un fichier               */
 /* En entrée : fichier_a_remplir, Fichier à remplir         */
-/*             agenda, Pointeur de tête de l'agenda        */
+/*             agenda, Pointeur de tête de l'agenda         */
 /* En sortie : Rien                                         */
 /* -------------------------------------------------------- */
 void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
 {
-    int deb;
-    char tache[TAILLE_ANNEE+TAILLE_SEMAINE+TAILLE_JOUR+TAILLE_HEURE+TAILLE_NOM_ACTION+2];
-    second_niveau_t * action;
-    FILE * fichier = NULL;
-    fichier = fopen(fichier_a_remplir, "w");
-
-    while (agenda != NULL) {
-        action = (*agenda).actions;
-
-        while (action != NULL) {
-            deb = 0;
-
-            for (int i=0; i<TAILLE_ANNEE; i++) {
-                tache[deb] = (*agenda).annee[i];
-                deb++;
+    //int deb;
+    //char tache[TAILLE_ANNEE+TAILLE_SEMAINE+TAILLE_JOUR+TAILLE_HEURE+TAILLE_NOM_ACTION+2];
+    FILE * fichier = fopen(fichier_a_remplir, "w");
+    premier_niveau_t * semaine_courante = agenda;
+    second_niveau_t * action_courante = NULL;
+    if (fichier) {
+        while (semaine_courante != NULL) {
+            action_courante = (*semaine_courante).actions;
+            while (action_courante != NULL) {
+                ecrire_ligne(fichier, (*semaine_courante).annee, TAILLE_ANNEE);
+                ecrire_ligne(fichier, semaine_courante->semaine, TAILLE_SEMAINE);
+                ecrire_ligne(fichier, action_courante->jour, TAILLE_JOUR);
+                ecrire_ligne(fichier, action_courante->heure, TAILLE_HEURE);
+                ecrire_ligne(fichier, action_courante->nom, TAILLE_NOM_ACTION);
+                fprintf(fichier, "\n");
+                action_courante = action_courante->suivant;
             }
-
-            for (int i=0; i<TAILLE_SEMAINE; i++) {
-                tache[deb] = (*agenda).semaine[i];
-                deb++;
-            }
-
-            for (int i=0; i<TAILLE_JOUR; i++) {
-                tache[deb] = (*action).jour[i];
-                deb++;
-            }
-
-            for (int i=0; i<TAILLE_HEURE; i++) {
-                tache[deb] = (*action).heure[i];
-                deb++;
-            }
-
-            for (int i=0; i<TAILLE_NOM_ACTION; i++) {
-                tache[deb] = (*action).nom[i];
-                deb++;
-            }
-
-            tache[deb] = '\n';
-            tache[deb+1] = '\0';
-
-            fprintf(fichier, "%s", tache);
-
-            action = (*action).suivant;
+            semaine_courante = semaine_courante->suivant;
         }
-        agenda = (*agenda).suivant;
     }
     fclose(fichier);
 }

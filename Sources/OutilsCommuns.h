@@ -38,3 +38,8 @@ int supprimer_action(premier_niveau_t **, char *, char *, char *, char *);
 /*                            dans un fichier               */
 /* -------------------------------------------------------- */
 void sauvegarder_agenda(char *, premier_niveau_t *);
+
+/* -------------------------------------------------------- */
+/* TODO                                                     */
+/* -------------------------------------------------------- */
+void ecrire_ligne(FILE *, char *, int);

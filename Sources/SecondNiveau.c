@@ -148,6 +148,16 @@ void remplir_informations_second_niveau(second_niveau_t * tete_liste, char * jou
 }
 
 /* -------------------------------------------------------- */
+/* TODO                                                     */
+/* -------------------------------------------------------- */
+void remplir_nom_action(second_niveau_t * tete_liste, char * ligne_courante)
+{
+    for (int i = 9; i < 19; i++) {
+        (*tete_liste).nom[i-9] = ligne_courante[i];
+    }
+}
+
+/* -------------------------------------------------------- */
 /* ajouter_SN_bon_endroit   Ajoute un bloc à l'emplacement  */
 /*                          demandé                         */
 /*                                                          */
@@ -251,27 +261,18 @@ second_niveau_t * supprimer_SN(second_niveau_t * tete_liste, char * jour, char *
     second_niveau_t  * nouvelle_action = NULL;
     second_niveau_t  * tmp;
     int a;
-    //on alloue l'action qu'on cherche
     a = allouer_second_niveau(&nouvelle_action);
     remplir_informations_second_niveau(nouvelle_action, jour, heure, "vide");
-    //tant qu'on n'a pas trouvé l'action (deuxième niveau) à supprimer on avance
     while (*action_precedente != NULL && comparer_heures_et_jours(*action_precedente, nouvelle_action) != 1) {
-        //printf("action pre jour :%s; action pre heure:%s\n", (*action_courante)->jour, (*action_courante)->heure);
         action_precedente = &(*action_precedente)->suivant;
     }
-    //si on trouve le deuxième niveau
     if (action_precedente) {
-        printf("[X] action trouvée\n");
-        printf("action trouvee :%s; %s\n", (*action_precedente)->jour, (*action_precedente)->heure);
         //on change le suivant
         tmp = *action_precedente;
         *action_precedente = (*action_precedente)->suivant;
-        //on supprime le 2eme niveau
         free(tmp);
         //on déalloue l'action qu'on cherche
         free(nouvelle_action); 
-    } else {
-        printf("[ ] action trouvée\n");
-    }  
+    }
     return tete_liste;
 }
