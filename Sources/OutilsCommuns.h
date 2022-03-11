@@ -25,21 +25,21 @@ int remplir_agenda(char *, premier_niveau_t **);
 /*                                          semaine existe  */
 /*                                          déjà            */
 /* -------------------------------------------------------- */
-premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t *, char *, char *);
+premier_niveau_t *retourner_semaine_existante_dans_agenda(premier_niveau_t *, char *, char *);
 
 /* -------------------------------------------------------- */
-/* supprimer_action   Supprime une action donnée dans       */
-/*                    l'agenda                              */
+/* supprimer_action Supprime une action donnée dans         */
+/*                  l'agenda                                */
 /* -------------------------------------------------------- */
-int supprimer_action(premier_niveau_t **, char *, char *, char *, char *);
+void supprimer_action(premier_niveau_t **, char *, char *, char *, char *);
 
 /* -------------------------------------------------------- */
-/* sauvegarder_agenda         Sauvegarde un agenda          */
-/*                            dans un fichier               */
+/* sauvegarder_agenda   Sauvegarde un agenda dans un fichier*/
 /* -------------------------------------------------------- */
 void sauvegarder_agenda(char *, premier_niveau_t *);
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */
+/* ecrire_ligne Ecrit une chaine d'une certaine taille dans */
+/*              un fichier                                  */
 /* -------------------------------------------------------- */
 void ecrire_ligne(FILE *, char *, int);

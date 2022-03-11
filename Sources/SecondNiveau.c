@@ -18,13 +18,16 @@
 /* En sortie : code, Entier valant 1 si l'allocation s'est  */
 /*             bien passée; 0 sinon                         */
 /* -------------------------------------------------------- */
-int allouer_second_niveau(second_niveau_t ** tete_liste)
+int allouer_second_niveau(second_niveau_t **tete_liste)
 {
     int code = 1;
     *tete_liste = (second_niveau_t *)malloc(sizeof(second_niveau_t));
-    if (tete_liste == NULL) {
+    if (tete_liste == NULL)
+    {
         code = 0;
-    } else {
+    }
+    else
+    {
         strcpy((*(*tete_liste)).heure, "vV");
         strcpy((*(*tete_liste)).jour, "v");
         strcpy((*(*tete_liste)).nom, "vide");
@@ -40,19 +43,17 @@ int allouer_second_niveau(second_niveau_t ** tete_liste)
 /* En entrée : nouveau_bloc, Pointeur sur le bloc à ajouter */
 /*                           à la liste                     */
 /*                                                          */
-/* En entrée/sortie : tete_liste, Pointeur indirect de      */ 
+/* En entrée/sortie : tete_liste, Pointeur indirect de      */
 /*                                la liste à laquelle       */
 /*                                on veut ajouter un bloc   */
 /*                                                          */
 /* En sortie : code, Entier valant 1 si l'ajout s'est bien  */
 /*             passée; 0 sinon                              */
 /* -------------------------------------------------------- */
-int ajouter_en_tete_second_niveau(second_niveau_t ** tete_liste, second_niveau_t * nouveau_bloc)
+void ajouter_en_tete_second_niveau(second_niveau_t **tete_liste, second_niveau_t *nouveau_bloc)
 {
-    int code = 1;
     (*nouveau_bloc).suivant = *tete_liste;
     *tete_liste = nouveau_bloc;
-    return code;
 }
 
 /* -------------------------------------------------------- */
@@ -63,18 +64,17 @@ int ajouter_en_tete_second_niveau(second_niveau_t ** tete_liste, second_niveau_t
 /*                                                          */
 /* En sortie : Rien mais écrit dans la sortie standard      */
 /* -------------------------------------------------------- */
-void afficher_second_niveau(second_niveau_t * tete_liste)
+void afficher_second_niveau(second_niveau_t *tete_liste)
 {
-    second_niveau_t * courant = tete_liste;
-    while (courant != NULL) {
+    second_niveau_t *courant = tete_liste;
+    while (courant != NULL)
+    {
         printf(" -> Jour ");
         afficher_chaine((*courant).jour, TAILLE_JOUR);
         printf(" à ");
         afficher_chaine((*courant).heure, TAILLE_HEURE);
         printf("h faire : ");
         afficher_chaine((*courant).nom, TAILLE_NOM_ACTION);
-        //if (strlen((*courant).nom) == TAILLE_NOM_ACTION && strcmp(&(*courant).nom[TAILLE_NOM_ACTION-1], "\n")) {
-        // Passage à l'action suivante dans la liste des actions
         courant = (*courant).suivant;
     }
 }
@@ -91,29 +91,28 @@ void afficher_second_niveau(second_niveau_t * tete_liste)
 /* En entrée/sortie : liste_jours, Pointeur d'une liste     */
 /*                    de jours                              */
 /* -------------------------------------------------------- */
-void rechercher_motif_second_niveau(char liste_jours[], char motif[], second_niveau_t * liste) 
+void rechercher_motif_second_niveau(char liste_jours[], char motif[], second_niveau_t *liste)
 {
-    int         i, j;
-    int         deb = 0;
+    int i = 0, j = 0;
+    int deb = 0;
 
-    while (liste != NULL) {
+    while (liste != NULL)
+    {
         i = 0;
         j = 0;
-
-        //recherche du premier caractère du motif
-        while (j<TAILLE_NOM_ACTION && (*liste).nom[j] != motif[0]) {
+        while (j < TAILLE_NOM_ACTION && (*liste).nom[j] != motif[0])
+        {
             j++;
         }
-
-        if ((*liste).nom[j] == motif[0]) {
-            //recherche du motif
-            while (j<TAILLE_NOM_ACTION && motif[i] != '\0' && (*liste).nom[j] == motif[i]) {
+        if ((*liste).nom[j] == motif[0])
+        {
+            while (j < TAILLE_NOM_ACTION && motif[i] != '\0' && (*liste).nom[j] == motif[i])
+            {
                 i++;
                 j++;
             }
-
-            //si le motif et le nom de l'action est le même, on ajoute le jour à la liste
-            if (motif[i] == '\0') {
+            if (motif[i] == '\0')
+            {
                 liste_jours[deb] = (*liste).jour[0];
                 deb++;
             }
@@ -137,9 +136,9 @@ void rechercher_motif_second_niveau(char liste_jours[], char motif[], second_niv
 /*                      écrire                              */
 /*                                                          */
 /* Entrée/Sortie : tete_liste, Pointeur sur la structure à  */
-/*                             remplir                      */                                                       
+/*                             remplir                      */
 /* -------------------------------------------------------- */
-void remplir_informations_second_niveau(second_niveau_t * tete_liste, char * jour, char * heure, char * nom_action)
+void remplir_informations_second_niveau(second_niveau_t *tete_liste, char *jour, char *heure, char *nom_action)
 {
     strncpy((*tete_liste).jour, jour, TAILLE_JOUR);
     strncpy((*tete_liste).heure, heure, TAILLE_HEURE);
@@ -148,12 +147,16 @@ void remplir_informations_second_niveau(second_niveau_t * tete_liste, char * jou
 }
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */
+/* remplir_nom_action   Remplie le champ du nom de l'action */
+/*                                                          */
+/* En entrée : tete_liste, Pointeur sur l'élément à modifier*/
+/*             ligne_courante, Nom de l'action              */
 /* -------------------------------------------------------- */
-void remplir_nom_action(second_niveau_t * tete_liste, char * ligne_courante)
+void remplir_nom_action(second_niveau_t *tete_liste, char *ligne_courante)
 {
-    for (int i = 9; i < 19; i++) {
-        (*tete_liste).nom[i-9] = ligne_courante[i];
+    for (int i = 9; i < 19; i++)
+    {
+        (*tete_liste).nom[i - 9] = ligne_courante[i];
     }
 }
 
@@ -163,31 +166,34 @@ void remplir_nom_action(second_niveau_t * tete_liste, char * ligne_courante)
 /*                                                          */
 /* En entrée : nouveau_bloc, Pointeur de tête du bloc à     */
 /*                           placer                         */
-/*                                                          */ 
+/*                                                          */
 /* En entrée/sortie : tete_liste, Pointeur indirect         */
 /*                                de l'emplacement demandé  */
 /*                                                          */
 /* En sortie : code, Entier valant 1 si l'ajout s'est bien  */
 /*             passée; 0 sinon                              */
 /* -------------------------------------------------------- */
-int ajouter_SN_bon_endroit(second_niveau_t ** tete_liste, second_niveau_t * nouveau_bloc)
+int ajouter_SN_bon_endroit(second_niveau_t **tete_liste, second_niveau_t *nouveau_bloc)
 {
     int code = 1;
     int trouve = 0;
-    second_niveau_t ** precedent = tete_liste;
     int resu_coma;
-    while (*precedent != NULL && trouve == 0) {
-        //comparaison
+
+    second_niveau_t **precedent = tete_liste;
+
+    while (*precedent != NULL && trouve == 0)
+    {
         resu_coma = comparer_heures_et_jours(*precedent, nouveau_bloc);
-        if (resu_coma == 3 || resu_coma == 1) {
+        if (resu_coma == 3 || resu_coma == 1)
+        {
             trouve = 1;
         }
-        //cas ajout en tete
-        if (trouve != 1) {
+        if (trouve != 1)
+        {
             precedent = &((*(*precedent)).suivant);
         }
     }
-    nouveau_bloc->suivant = *precedent; 
+    (*nouveau_bloc).suivant = *precedent;
     *precedent = nouveau_bloc;
     return code;
 }
@@ -208,35 +214,44 @@ int ajouter_SN_bon_endroit(second_niveau_t ** tete_liste, second_niveau_t * nouv
 /*                       l'autre ou si le jour du courant   */
 /*                       est inférieur à l'autre; 3 sinon   */
 /* -------------------------------------------------------- */
-int comparer_heures_et_jours(second_niveau_t * courant, second_niveau_t * nouveau_bloc)
+int comparer_heures_et_jours(second_niveau_t *courant, second_niveau_t *nouveau_bloc)
 {
-    // résultat des comparaisons
-    char * courant_jour = retourner_debut_chaine((*courant).jour, TAILLE_JOUR);
-    char * courant_heure = retourner_debut_chaine((*courant).heure, TAILLE_HEURE);
-    char * nouveau_jour = retourner_debut_chaine((*nouveau_bloc).jour, TAILLE_JOUR);
-    char * nouveau_heure = retourner_debut_chaine((*nouveau_bloc).heure, TAILLE_HEURE);
+    char *courant_jour = retourner_debut_chaine((*courant).jour, TAILLE_JOUR);
+    char *courant_heure = retourner_debut_chaine((*courant).heure, TAILLE_HEURE);
+    char *nouveau_jour = retourner_debut_chaine((*nouveau_bloc).jour, TAILLE_JOUR);
+    char *nouveau_heure = retourner_debut_chaine((*nouveau_bloc).heure, TAILLE_HEURE);
     int comparaison_jours = strncmp(nouveau_jour, courant_jour, TAILLE_JOUR);
     int comparaison_heures = strncmp(nouveau_heure, courant_heure, TAILLE_HEURE);
     int resultat = 0;
-    //si même jours
-    if (comparaison_jours == 0) {
-        //si même heure
-        if (comparaison_heures == 0) {
-            //même date
+
+    if (comparaison_jours == 0)
+    {
+        if (comparaison_heures == 0)
+        {
+            // même date
             resultat = 1;
-        } else if (comparaison_heures > 0) {
-            //date du courant < date du nouveau bloc
+        }
+        else if (comparaison_heures > 0)
+        {
+            // date du courant < date du nouveau bloc
             resultat = 2;
-        } else {
-            //date du courant > date du nouveau bloc
+        }
+        else
+        {
+            // date du courant > date du nouveau bloc
             resultat = 3;
         }
-    } else {
-        if (comparaison_jours > 0) {
-            //date du courant < date du nouveau bloc
+    }
+    else
+    {
+        if (comparaison_jours > 0)
+        {
+            // date du courant < date du nouveau bloc
             resultat = 2;
-        } else {
-            //date du courant > date du nouveau bloc
+        }
+        else
+        {
+            // date du courant > date du nouveau bloc
             resultat = 3;
         }
     }
@@ -255,24 +270,25 @@ int comparer_heures_et_jours(second_niveau_t * courant, second_niveau_t * nouvea
 /* En entrée/sortie : tete_liste, Pointeur d'une liste      */
 /*                                d'actions                 */
 /* -------------------------------------------------------- */
-second_niveau_t * supprimer_SN(second_niveau_t * tete_liste, char * jour, char * heure)
+second_niveau_t *supprimer_SN(second_niveau_t *tete_liste, char *jour, char *heure)
 {
-    second_niveau_t ** action_precedente = &tete_liste;
-    second_niveau_t  * nouvelle_action = NULL;
-    second_niveau_t  * tmp;
-    int a;
-    a = allouer_second_niveau(&nouvelle_action);
+    second_niveau_t **action_precedente = &tete_liste;
+    second_niveau_t *nouvelle_action = NULL;
+    second_niveau_t *tmp;
+
+    allouer_second_niveau(&nouvelle_action);
     remplir_informations_second_niveau(nouvelle_action, jour, heure, "vide");
-    while (*action_precedente != NULL && comparer_heures_et_jours(*action_precedente, nouvelle_action) != 1) {
-        action_precedente = &(*action_precedente)->suivant;
+
+    while (*action_precedente != NULL && comparer_heures_et_jours(*action_precedente, nouvelle_action) != 1)
+    {
+        action_precedente = &(*(*action_precedente)).suivant;
     }
-    if (action_precedente) {
-        //on change le suivant
+    if (action_precedente)
+    {
         tmp = *action_precedente;
-        *action_precedente = (*action_precedente)->suivant;
+        *action_precedente = (*(*action_precedente)).suivant;
         free(tmp);
-        //on déalloue l'action qu'on cherche
-        free(nouvelle_action); 
+        free(nouvelle_action);
     }
     return tete_liste;
 }
