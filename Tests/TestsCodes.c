@@ -56,7 +56,7 @@ TEST(COMPARER_SEMAINES_ET_ANNEES, "")
     code_comparer_semaines_et_annees = comparer_semaines_et_annees(semaine_1, semaine_2);
     CHECK(1 == code_comparer_semaines_et_annees);
 
-    //même semaine et même année
+    //même semaine et pas même année
     remplir_informations_premier_niveau(semaine_1, "2010", "05");
     remplir_informations_premier_niveau(semaine_2, "2020", "05");
     code_comparer_semaines_et_annees = comparer_semaines_et_annees(semaine_1, semaine_2);
