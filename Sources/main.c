@@ -8,42 +8,46 @@
 #include <string.h>
 
 /* -------------------------------------------------------- */
-/* rechercher_motif_premier_niveau   Affiche la liste       */
-/*                                   des dates avec         */
-/*                                   une action contenant   */
-/*                                   un motif donné         */
+/* main Fonction principale qui passe en revue toutes les   */
+/*      questions du TP1 de Structure de données - langage C*/
 /*                                                          */
-/* En entrée : motif, Chaine de caractères à chercher       */
-/*             liste, Pointeur d'une liste d'actions        */
-/*                                                          */
-/* En entrée/sortie : liste_dates, Pointeur d'une liste     */
-/*                    de dates                              */
+/* En entrée : argc, Nombre d'arguments passés en ligne de  */
+/*             commande                                     */
+/*             argv, Liste des arguments passés             */
 /* -------------------------------------------------------- */
-int main(int argc, char * argv[])
+int main(int argc, char *argv[])
 {
-    premier_niveau_t * agenda;
-    char liste_dates[100];
-    //char * fichier_a_remplir = "fi_2.txt";
-    agenda = NULL;
+    premier_niveau_t *agenda = NULL;
+    char liste_dates[1000];
+    char *motif = "a";
 
-    int a;
     printf("Il y a %d argument(s)\n", argc);
-    a = allouer_premier_niveau(&agenda);
-    printf("a = %d : allouer premier niveau\n", a);
-    a = remplir_agenda(argv[1], &agenda);
-    printf("a = %d : remplir l'agenda\n", a);
-    afficher_agenda(agenda);
 
-
-    rechercher_motif_premier_niveau(liste_dates, "e", agenda);
-    printf("=> %s\n", liste_dates);
-
-
-    //a = supprimer_action(&agenda, "1912", "16", "4", "18");
-    //printf("a = %d : état suppresion\n", a);
-    //afficher_agenda(agenda);
-    //sauvegarder_agenda(fichier_a_remplir, agenda);
-
-
+    if (argc == 2)
+    {
+        allouer_premier_niveau(&agenda);
+        // question 1
+        printf("\nQuestion 1 : remplir l'agenda.\n");
+        remplir_agenda(argv[1], &agenda);
+        afficher_agenda(agenda);
+        // question 2.1
+        printf("\nQuestion 2.1 : sauvegarder l'agenda.\n");
+        printf("Sauvegarde dans le fichier 'fi_save.txt'\n");
+        sauvegarder_agenda("fi_save.txt", agenda);
+        // question 2.2
+        printf("\nQuestion 2.2 : recherche de motif.\n");
+        rechercher_motif_premier_niveau(liste_dates, motif, agenda);
+        printf("Le motif (%s) a été trouvé ici dans ces jours : %s\n", motif, liste_dates);
+        // question 3
+        printf("\nQuestion 3 : suppression d'une action.\n");
+        supprimer_action(&agenda, "1912", "16", "4", "18");
+        afficher_agenda(agenda);
+        printf("\nFin du programme principal.\n");
+    }
+    else
+    {
+        printf("Pas assez ou trop d'arguments pour un bon fonctionnement.\n");
+        printf("Essayez quelque chose comme : ./main [nom d'un fichier].txt\n");
+    }
     return 0;
 }

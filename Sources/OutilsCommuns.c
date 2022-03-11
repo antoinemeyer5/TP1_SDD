@@ -18,7 +18,8 @@
 /* -------------------------------------------------------- */
 void afficher_chaine(char mot[], int taille)
 {
-    for (int i = 0; i < taille; i++) {
+    for (int i = 0; i < taille; i++)
+    {
         printf("%c", mot[i]);
     }
 }
@@ -31,24 +32,25 @@ void afficher_chaine(char mot[], int taille)
 /*                                                          */
 /* En sortie : Rien mais écrit dans la sortie standard      */
 /* -------------------------------------------------------- */
-void afficher_agenda(premier_niveau_t * tete_agenda)
+void afficher_agenda(premier_niveau_t *tete_agenda)
 {
-    if (tete_agenda != NULL) {
-        // Parcours de la liste des semaines
-        while ((*tete_agenda).suivant != NULL) {
+    if (tete_agenda != NULL)
+    {
+        while ((*tete_agenda).suivant != NULL)
+        {
             printf("Semaine ");
             afficher_chaine((*tete_agenda).semaine, TAILLE_SEMAINE);
             printf(" de ");
             afficher_chaine((*tete_agenda).annee, TAILLE_ANNEE);
             printf("\n");
-            // Test de présence d'actions pour une semaine
-            if ((*tete_agenda).actions == NULL) {
+            if ((*tete_agenda).actions == NULL)
+            {
                 printf("    pas d'actions ... NE DEVRAIT PAS EXISTER\n");
-            } else {
-                // Parcours de la liste des actions
+            }
+            else
+            {
                 afficher_second_niveau((*tete_agenda).actions);
             }
-            // Passage à la semaine suivante dans la liste de semaines
             tete_agenda = (*tete_agenda).suivant;
             printf("\n");
         }
@@ -69,52 +71,53 @@ void afficher_agenda(premier_niveau_t * tete_agenda)
 /* En sortie : Code qui permet de savoir si le fichier a    */
 /*             bien été lu et bien remplie                  */
 /* -------------------------------------------------------- */
-int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
+int remplir_agenda(char *fichier_lisible, premier_niveau_t **agenda)
 {
     int code = 1;
-    FILE * le_fichier = fopen(fichier_lisible, "r");
-    // Fixation de la taille d'une ligne d'un fichier à lire
+    int a = -1;
+    FILE *le_fichier = fopen(fichier_lisible, "r");
     int taille_ligne = TAILLE_ANNEE + TAILLE_SEMAINE + TAILLE_JOUR + TAILLE_HEURE + TAILLE_NOM_ACTION + 3;
     char ligne_courante[taille_ligne];
-    // Variables spécifiques à la création d'une nouvelle semaine
-    premier_niveau_t * nouvelle_semaine = NULL, * semaine_existante = NULL;
-    char * l_annee, * l_semaine;
-    // Variables spécifiques à la création d'une nouvelle action
-    second_niveau_t * nouvelle_action = NULL;
-    char * l_jour, * l_heure, * l_nom_action;
-    // Variable équivalente à un code de bon fonctionnement ou d'erreur
-    int a;
-    if(le_fichier){
-        while (!feof(le_fichier) && fgets(ligne_courante, taille_ligne, le_fichier) != NULL) {
-            // Récupération des informations contenues dans une ligne du fichier
+
+    premier_niveau_t *nouvelle_semaine = NULL, *semaine_existante = NULL;
+    char *l_annee, *l_semaine;
+
+    second_niveau_t *nouvelle_action = NULL;
+    char *l_jour, *l_heure, *l_nom_action;
+
+    if (le_fichier)
+    {
+        while (!feof(le_fichier) && fgets(ligne_courante, taille_ligne, le_fichier) != NULL)
+        {
             l_annee = retourner_milieu_chaine(ligne_courante, 0, 4);
             l_semaine = retourner_milieu_chaine(ligne_courante, 4, 6);
             l_jour = retourner_milieu_chaine(ligne_courante, 6, 7);
             l_heure = retourner_milieu_chaine(ligne_courante, 7, 9);
-            l_nom_action = retourner_milieu_chaine(ligne_courante, 9, 9+TAILLE_NOM_ACTION+3);
-            // Création d'une nouvelle action
-            a = allouer_second_niveau(&nouvelle_action);
-            // Remplissage des informations de la nouvelle action
+            l_nom_action = retourner_milieu_chaine(ligne_courante, 9, 9 + TAILLE_NOM_ACTION + 3);
+
+            allouer_second_niveau(&nouvelle_action);
             remplir_informations_second_niveau(nouvelle_action, l_jour, l_heure, l_nom_action);
-            // Ajoute de la nouvelle action dans une semaine déjà existante
             semaine_existante = retourner_semaine_existante_dans_agenda(*agenda, l_annee, l_semaine);
-            // Test si la potentielle nouvelle action existe déjà dans l'agenda
-            if (semaine_existante != NULL) {   
-                a = ajouter_SN_bon_endroit(&(*semaine_existante).actions, nouvelle_action);
-            } else {
+
+            if (semaine_existante != NULL)
+            {
+                ajouter_SN_bon_endroit(&(*semaine_existante).actions, nouvelle_action);
+            }
+            else
+            {
                 a = allouer_premier_niveau(&nouvelle_semaine);
-                if (a == 1) {
-                    // Remplissage des informations de la nouvelle semaine
+                if (a == 1)
+                {
                     remplir_informations_premier_niveau(nouvelle_semaine, l_annee, l_semaine);
-                    // Ajout de la nouvelle semaine à l'agenda                    
-                    a = ajouter_PN_bon_endroit(agenda, nouvelle_semaine);
-                    a = ajouter_SN_bon_endroit(&(nouvelle_semaine->actions), nouvelle_action);
+                    ajouter_PN_bon_endroit(agenda, nouvelle_semaine);
+                    ajouter_SN_bon_endroit(&(nouvelle_semaine->actions), nouvelle_action);
                 }
-            }      
+            }
         }
-        // Fermeture du fichier une fois lu entièrement
         fclose(le_fichier);
-    }else{
+    }
+    else
+    {
         code = 0;
     }
     return code;
@@ -132,12 +135,15 @@ int remplir_agenda(char * fichier_lisible, premier_niveau_t ** agenda)
 /*                                                          */
 /* En sortie : La semaine trouvée ou null                   */
 /* -------------------------------------------------------- */
-premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t * tete_agenda, char * annee, char * semaine)
+premier_niveau_t *retourner_semaine_existante_dans_agenda(premier_niveau_t *tete_agenda, char *annee, char *semaine)
 {
-    premier_niveau_t * semaine_retour = NULL;
-    if (tete_agenda != NULL) {
-        while ((*tete_agenda).suivant != NULL && semaine_retour == NULL) {
-            if (exister_dans_premier_niveau(tete_agenda, annee, semaine) == 1) {
+    premier_niveau_t *semaine_retour = NULL;
+    if (tete_agenda != NULL)
+    {
+        while ((*tete_agenda).suivant != NULL && semaine_retour == NULL)
+        {
+            if (exister_dans_premier_niveau(tete_agenda, annee, semaine) == 1)
+            {
                 semaine_retour = tete_agenda;
             }
             tete_agenda = (*tete_agenda).suivant;
@@ -149,6 +155,7 @@ premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t * te
 /* -------------------------------------------------------- */
 /* supprimer_action   Supprime une action donnée dans       */
 /*                    l'agenda                              */
+/*                                                          */
 /* En entrée : agenda, Pointeur indirect de tête de         */
 /*                     l'agenda étudié                      */
 /*             annee, Chaîne représentant l'année de        */
@@ -158,86 +165,83 @@ premier_niveau_t * retourner_semaine_existante_dans_agenda(premier_niveau_t * te
 /*             jour, Chaîne représentant le jour de         */
 /*                   l'action à supprimer                   */
 /*             heure, Chaîne représentant l'heure de        */
-/*                    l'action à supprimer                  */ 
-/* En sortie : 0                                            */
+/*                    l'action à supprimer                  */
 /* -------------------------------------------------------- */
-int supprimer_action(premier_niveau_t ** agenda, char * annee, char * semaine, char * jour, char * heure)
+void supprimer_action(premier_niveau_t **agenda, char *annee, char *semaine, char *jour, char *heure)
 {
-    premier_niveau_t ** semaine_precedente = agenda;
-    premier_niveau_t * nouveau_bloc = NULL;
-    premier_niveau_t * tmp2;
-    int a;
-    printf("début suppresion ...\n");
-    a = allouer_premier_niveau(&nouveau_bloc);
-    printf("a = %d\n", a);
+    premier_niveau_t **semaine_precedente = agenda;
+    premier_niveau_t *nouveau_bloc = NULL;
+    premier_niveau_t *tmp2;
+
+    allouer_premier_niveau(&nouveau_bloc);
     remplir_informations_premier_niveau(nouveau_bloc, annee, semaine);
-    //tant qu'on n'a pas trouvé la semaine (premier niveau) à supprimer on avance
-    while (*semaine_precedente != NULL && comparer_semaines_et_annees(*semaine_precedente, nouveau_bloc) != 1) {
-        semaine_precedente = &(*semaine_precedente)->suivant;
-        //semaine_courante = &(*semaine_courante)->suivant;
+
+    while (*semaine_precedente != NULL && comparer_semaines_et_annees(*semaine_precedente, nouveau_bloc) != 1)
+    {
+        semaine_precedente = &(*(*semaine_precedente)).suivant;
     }
-    //si on trouve le premier niveau
-    if (*semaine_precedente) {
-        printf("[X] semaine trouvée\n");
-        printf("semaine trouvee :%s; :%s\n", (*semaine_precedente)->annee, (*semaine_precedente)->semaine);
-        (*semaine_precedente)->actions = supprimer_SN((*semaine_precedente)->actions, jour, heure);
-        printf("allez la\n");
-        //si le premier niveau est vide
-        if ((*semaine_precedente)->actions == NULL ) {
-            //on change le suivant et
+
+    if (*semaine_precedente)
+    {
+        (*(*semaine_precedente)).actions = supprimer_SN((*(*semaine_precedente)).actions, jour, heure);
+        if ((*(*semaine_precedente)).actions == NULL)
+        {
             tmp2 = *semaine_precedente;
-            *semaine_precedente = (*semaine_precedente)->suivant;
-            //on supprime le 1er niveau
+            *semaine_precedente = (*(*semaine_precedente)).suivant;
             free(tmp2);
-            //on déalloue la semaine qu'on cherche
             free(nouveau_bloc);
-        }     
+        }
     }
-    //return 0 si mal passée
-    //return 1 si on a supprime quelque chose
-    //return -1 si on n'a rien supprimé
-    return 0;
 }
 
 /* -------------------------------------------------------- */
-/* TODO                                                     */
+/* ecrire_ligne Ecrit une chaine d'une certaine taille dans */
+/*              un fichier                                  */
+/*                                                          */
+/* En entrée : fichier, Pointeur de tête d'un fichier       */
+/*             chaine, Chaîne à écrire                      */
+/*             taille, Taille de la chaine à écrire         */
 /* -------------------------------------------------------- */
-void ecrire_ligne(FILE * fichier, char * chaine, int taille)
+void ecrire_ligne(FILE *fichier, char *chaine, int taille)
 {
-    for (int i = 0; i < taille; i++) {
-        if (chaine[i] != NULL && chaine[i] != '\n') {
+    for (int i = 0; i < taille; i++)
+    {
+        if (chaine[i] != NULL && chaine[i] != '\n')
+        {
             fprintf(fichier, "%c", chaine[i]);
         }
     }
 }
 
 /* -------------------------------------------------------- */
-/* sauvegarder_agenda         Sauvegarde un agenda          */
-/*                            dans un fichier               */
+/* sauvegarder_agenda   Sauvegarde un agenda dans un fichier*/
+/*                                                          */
 /* En entrée : fichier_a_remplir, Fichier à remplir         */
 /*             agenda, Pointeur de tête de l'agenda         */
+/*                                                          */
 /* En sortie : Rien                                         */
 /* -------------------------------------------------------- */
-void sauvegarder_agenda(char * fichier_a_remplir, premier_niveau_t * agenda)
+void sauvegarder_agenda(char *fichier_a_remplir, premier_niveau_t *agenda)
 {
-    //int deb;
-    //char tache[TAILLE_ANNEE+TAILLE_SEMAINE+TAILLE_JOUR+TAILLE_HEURE+TAILLE_NOM_ACTION+2];
-    FILE * fichier = fopen(fichier_a_remplir, "w");
-    premier_niveau_t * semaine_courante = agenda;
-    second_niveau_t * action_courante = NULL;
-    if (fichier) {
-        while (semaine_courante != NULL) {
+    FILE *fichier = fopen(fichier_a_remplir, "w");
+    premier_niveau_t *semaine_courante = agenda;
+    second_niveau_t *action_courante = NULL;
+    if (fichier)
+    {
+        while (semaine_courante != NULL)
+        {
             action_courante = (*semaine_courante).actions;
-            while (action_courante != NULL) {
+            while (action_courante != NULL)
+            {
                 ecrire_ligne(fichier, (*semaine_courante).annee, TAILLE_ANNEE);
-                ecrire_ligne(fichier, semaine_courante->semaine, TAILLE_SEMAINE);
-                ecrire_ligne(fichier, action_courante->jour, TAILLE_JOUR);
-                ecrire_ligne(fichier, action_courante->heure, TAILLE_HEURE);
-                ecrire_ligne(fichier, action_courante->nom, TAILLE_NOM_ACTION);
+                ecrire_ligne(fichier, (*semaine_courante).semaine, TAILLE_SEMAINE);
+                ecrire_ligne(fichier, (*action_courante).jour, TAILLE_JOUR);
+                ecrire_ligne(fichier, (*action_courante).heure, TAILLE_HEURE);
+                ecrire_ligne(fichier, (*action_courante).nom, TAILLE_NOM_ACTION);
                 fprintf(fichier, "\n");
-                action_courante = action_courante->suivant;
+                action_courante = (*action_courante).suivant;
             }
-            semaine_courante = semaine_courante->suivant;
+            semaine_courante = (*semaine_courante).suivant;
         }
     }
     fclose(fichier);
