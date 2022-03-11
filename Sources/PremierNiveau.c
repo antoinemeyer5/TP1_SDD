@@ -134,6 +134,7 @@ void rechercher_motif_premier_niveau(char liste_dates[], char motif[], premier_n
 
     while (liste != NULL) {
         rechercher_motif_second_niveau(liste_jours, motif, (*liste).actions);
+        printf("jours : %s\n", liste_jours);
         k = 0;
 
         while (liste_jours[k] != '\0') {
@@ -150,8 +151,6 @@ void rechercher_motif_premier_niveau(char liste_dates[], char motif[], premier_n
             liste_dates[deb] = liste_jours[0];
             liste_jours[0] = liste_jours[k];
             k++;
-            deb++;
-            liste_dates[deb] = ' ';
             deb++;
         }
         liste = (*liste).suivant;
