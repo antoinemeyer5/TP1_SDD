@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     {
         allouer_premier_niveau(&agenda);
         // question 1
-        printf("\nQuestion 1 : remplir l'agenda.\n");
+        printf("\nQuestion 1 : remplir l'agenda à partir du fichier 'fi_3.txt'.\n");
         remplir_agenda(argv[1], &agenda);
         afficher_agenda(agenda);
         // question 2.1
